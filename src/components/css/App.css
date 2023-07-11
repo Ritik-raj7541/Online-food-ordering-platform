@@ -8,7 +8,14 @@
 .navbar{
       background: rgb(5, 53, 51);
 }
-.rough{
+.custom-container{
       /* border: 2px solid black; */
-      padding: 15px 15px;
+      padding: 0px 15px;
+}
+.custom-container-2{
+      padding: 15px 5px;
+}
+.carousel-image{
+      width: 100%;
+      height: 500px;
 }
