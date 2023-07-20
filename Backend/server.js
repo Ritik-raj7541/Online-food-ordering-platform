@@ -1,10 +1,14 @@
 const express = require('express') ;
 const connectDB = require('./config/dbConnection');
 const dotenv = require("dotenv").config() ;
+const cors = require('cors') ;
+const bodyParser = require('body-parser');
 
 const app = express() ;
 
 connectDB() ;
+app.use(cors()) ; 
+app.use(bodyParser.json()) ;
 app.use(express.json()) ;
 app.use('/api/customer', require('./routes/customerRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes')) ;
