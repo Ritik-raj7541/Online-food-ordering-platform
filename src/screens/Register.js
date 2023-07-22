@@ -1,27 +1,30 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
-      const [credentials, setcredentials] = useState({
-            name:"",
-            email:"",
-            password:"",
-      });
-      const handleSubmission = async(e)=>{
-            e.preventDefault() ;
-            const response = await axios.post('http://localhost:5000/api/customer/register', credentials);
-            console.log(response);
-      }
-      const onChange = (e)=>{
-            const { name, value } = e.target;
-            setcredentials({...credentials,[name]:value})
-      }
+  const [credentials, setcredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleSubmission = async (e) => {
+    e.preventDefault();
+    const response = await axios.post(
+      "http://localhost:5000/api/customer/register",
+      credentials
+    );
+    console.log(response);
+  };
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setcredentials({ ...credentials, [name]: value });
+  };
   return (
     <>
       <div className="container">
         <form onSubmit={handleSubmission}>
-        <div className="form-group my-3">
+          <div className="form-group my-3">
             <label htmlFor="exampleInputEmail1">Name</label>
             <input
               type="text"
@@ -62,12 +65,14 @@ export default function Register() {
               onChange={onChange}
             />
           </div>
-          
+
           <button type="submit" className="btn btn-primary my-3">
             Submit
           </button>
-            <Link to="/login" className="btn btn-danger m-3"> Already have an account </Link>
-            
+          <Link to="/login" className="btn btn-danger m-3">
+            {" "}
+            Already have an account{" "}
+          </Link>
         </form>
       </div>
     </>
