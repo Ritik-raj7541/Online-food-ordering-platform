@@ -2,10 +2,6 @@ const asyncHandler = require('express-async-handler') ;
 const Customer = require('../models/customer') ;
 const bcrypt = require('bcrypt') ;
 const jwt = require('jsonwebtoken') ;
-//get methods
-const getHome = asyncHandler (async (req, res) =>{
-      res.status(200).json({message:"it is good"}) ;
-});
 
 //post method for registering user
 const postRegister = asyncHandler (async (req, res) =>{
@@ -59,4 +55,4 @@ const postLogin = asyncHandler( async(req, res)=>{
       }
 }) ;
 
-module.exports = {getHome, postRegister, postLogin} ;
+module.exports = {postRegister, postLogin} ;
