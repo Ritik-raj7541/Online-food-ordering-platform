@@ -2,11 +2,22 @@ const asyncHandler = require('express-async-handler') ;
 const foodItem = require('../models/foods/foodItems') ;
 const foodCategory = require('../models/foods/foodCategory') ;
 
-//access only to admin
-// post - api/admin/add-items
+//1.
+//GET - api/admin/get-all-items
+const getFoodItems = asyncHandler(async(req, res) =>{
+      const allFood = await foodItem.find({}) ;
+      res.status(200).json(allFood) ;
+}) ;
+//2.
+//GET - api/admin/get-all-category
+const getCategory = asyncHandler(async(req, res) =>{
+      const allCategory = await foodCategory.find() ;
+      res.status(200).json(allCategory) ;
+}) ;
+//3.
+//POST - api/admin/add-items
 const postItems = asyncHandler(async(req, res) => {
       const {CategoryName, name, img, options, description} = req.body ;
-      console.log(req.body);
       if(!CategoryName || !name || !img || !options || !description){
             res.status(400) ;
             throw new Error("All fields are mandatory!!") ;
@@ -28,8 +39,8 @@ const postItems = asyncHandler(async(req, res) => {
       res.status(200).json(newItem) ;
 }) ;
 
-//admin access
-//delete - api/admin/delete-items/:id
+//4.
+//DELETE - api/admin/delete-items/:id
 const deleteItems = asyncHandler(async(req, res)=>{
       const itemId = req.params.id ;
       const deletedItem = await foodItem.deleteOne({_id:itemId}) ;
@@ -41,4 +52,20 @@ const deleteItems = asyncHandler(async(req, res)=>{
 
 }) ;
 
-module.exports = {postItems, deleteItems} ;
+//5.
+//PUT - api/admin/update-items/:id
+const updateItem = asyncHandler(async(req, res)=>{const itemId = req.params.id ;
+      const item = await foodItem.findOne({_id:itemId}) ;
+      if(!item){
+            res.status(400);
+            throw new Error('product not found') ;
+      }
+      const updatedItem = await foodItem.findByIdAndUpdate({_id: itemId}, req.body,{new:true}) ;
+      res.status(200).json(updatedItem) ;
+}) ;
+module.exports = {postItems, 
+                  deleteItems, 
+                  getFoodItems, 
+                  getCategory, 
+                  updateItem
+            } ;
