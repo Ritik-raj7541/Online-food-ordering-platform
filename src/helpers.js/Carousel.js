@@ -1,7 +1,7 @@
 import React from "react";
-import a from "../pictures/a.jpg";
-import b from "../pictures/b.jpg";
-import c from "../pictures/c.jpg";
+import a from "../pictures/carsoule-food.jpg";
+import b from "../pictures/carsoule-delivery.jpg";
+import c from "../pictures/carsoule-care.jpg";
 import Search from "./Search";
 
 export default function Staters() {
@@ -32,30 +32,30 @@ export default function Staters() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src={c} className="d-block carousel-image" alt="pic_1" />
+            <img src={a} className="d-block carousel-image" alt="pic_1" />
             <div className="carousel-caption d-none d-md-block">
-              {/* <h5>First slide label</h5>
-              <p>
+              <h5>We Serve</h5>
+              {/* <p>
                 Some representative placeholder content for the first slide.
               </p> */}
               <Search/>
             </div>
           </div>
           <div className="carousel-item">
-            <img src={a} className="d-block carousel-image" alt="pic_2" />
+            <img src={b} className="d-block carousel-image" alt="pic_2" />
             <div className="carousel-caption d-none d-md-block">
-              {/* <h5>Second slide label</h5>
-              <p>
+              <h5>We Deliver</h5>
+              {/* <p>
                 Some representative placeholder content for the second slide.
               </p> */}
               <Search/>
             </div>
           </div>
           <div className="carousel-item">
-            <img src={b} className="d-block carousel-image" alt="pic_3" />
+            <img src={c} className="d-block carousel-image" alt="pic_3" />
             <div className="carousel-caption d-none d-md-block">
-              {/* <h5>Third slide label</h5>
-              <p>
+              <h5>We Care</h5>
+              {/* <p>
                 Some representative placeholder content for the third slide.
               </p> */}
               <Search/>

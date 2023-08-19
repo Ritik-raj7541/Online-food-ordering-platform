@@ -11,11 +11,7 @@ export default function Home() {
       <Carousel />
       <div className="container">
         <Items />
-        <Items/>
-        <Items/>
-        <Items/>
       </div>
-
       <Footer />
     </div>
   );
