@@ -1,6 +1,6 @@
 const express = require('express') ;
 const routes = express.Router() ;
-const { postItems, deleteItems, getFoodItems, getCategory, updateItem } = require('../controllers/adminCRUDcontrollers');
+const { postItems, deleteItems, getFoodItems, getCategory, updateItem } = require('../controllers/admin/adminCRUDcontrollers');
 
 routes.route('/get-all-items').get(getFoodItems) ;
 routes.route('/get-all-category').get(getCategory) ;

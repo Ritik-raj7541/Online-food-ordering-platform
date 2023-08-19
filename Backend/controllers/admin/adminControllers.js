@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler') ;
-const Admin = require('../models/admin') ;
+const Admin = require('../../models/admin') ;
 
 //post method for registering user
 const postRegister = asyncHandler (async (req, res) =>{

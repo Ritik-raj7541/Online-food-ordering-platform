@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler') ;
-const foodItem = require('../models/foods/foodItems') ;
-const foodCategory = require('../models/foods/foodCategory') ;
+const foodItem = require('../../models/foods/foodItems') ;
+const foodCategory = require('../../models/foods/foodCategory') ;
 
 //1.
 //GET - api/admin/get-all-items
