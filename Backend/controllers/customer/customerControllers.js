@@ -46,7 +46,7 @@ const postLogin = asyncHandler( async(req, res)=>{
                   }
             },
             process.env.SECERET_ACCESS_TOKEN,
-            {expiresIn:"5m"}
+            {expiresIn:"1m"}
             ) ;
             res.status(200).json({accessToken}) ;
       }else{
