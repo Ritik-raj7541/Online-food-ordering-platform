@@ -1,4 +1,5 @@
 import React from "react";
+import ItemsSelection from "./ItemsSelection";
 
 export default function ItemsDetails(props) {
   const items = props.items;
@@ -19,7 +20,10 @@ export default function ItemsDetails(props) {
                 <h5 className="card-title item" key={item._id}>
                   {item.name}
                 </h5>
+                <hr />
                 <p className="card-text" key={item.description}>{item.description}</p>
+                <hr />
+                <ItemsSelection itemQuant = {item.quantity} itemPrice={item.options}/>
               </div>
             </div>
           </div>

@@ -6,7 +6,7 @@
       font-size: large;
 }
 .navbar{
-      background: rgb(60, 136, 134);
+      background: #ee2020;
 }
 .custom-container{
       /* border: 2px solid black; */
@@ -19,3 +19,10 @@
       width: 100%;
       height: 500px;
 }
+
+/* for  item details*/
+.container-items{
+      padding: auto;
+      margin: auto;
+}
+
