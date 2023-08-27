@@ -23,7 +23,7 @@ export default function ItemsDetails(props) {
                 <hr />
                 <p className="card-text" key={item.description}>{item.description}</p>
                 <hr />
-                <ItemsSelection itemQuant = {item.quantity} itemPrice={item.options}/>
+                <ItemsSelection  ItemsDetails = {item} itemPrice={item.options[0]}/>
               </div>
             </div>
           </div>

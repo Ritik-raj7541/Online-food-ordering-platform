@@ -7,7 +7,6 @@ export default function Items() {
   const url = "http://localhost:5000/api/customer/getItem";
   const [foodItems, getfoodItems] = useState([]);
   useEffect(() => {
-    console.log("useeffect");
     getAllFoodItems();
   }, []);
 
