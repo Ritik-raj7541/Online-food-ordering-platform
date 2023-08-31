@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../components/css/App.css";
+import{CartContext} from './ContextReducer'
 
 export default function Navbar() {
   const navigate = useNavigate() ;
@@ -9,6 +10,8 @@ export default function Navbar() {
     console.log("deleted");
     navigate('/') ;
   }
+  const {cart} = useContext(CartContext) ;
+  
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark shadow-5-strong navstyle">
@@ -54,24 +57,27 @@ export default function Navbar() {
               <div className="nav-item d-flex">
                 <div className="dropdown">
                   <Link
-                    className="dropdown-toggle mx-3"
+                    className="dropdown-toggle mx-3 notification"
                     href="#"
                     role="button"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    aria-expanded="false"   
                   >
                     <i className="fa-solid fa-user" style={{ color: "#e3e7ed" }}></i>
+                    {cart.length !==0 ?(<span className="badge">{cart.length}</span>):""}
+                    
                   </Link>
                   <ul className="dropdown-menu btn btn-secondary " style={{ '--bs-dropdown-min-width': '1rem' }}>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                      <i className="fa-solid fa-cart-shopping"></i>
-                      </a>
+                    <li className="notification">
+                      <Link className="dropdown-item" to="/myCart">
+                      <i className="fa-solid fa-cart-shopping" style={{ color: "#ee3d3d" }}></i>
+                      {cart.length !==0 ?(<span className="badge">{cart.length}</span>):""}
+                      </Link>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
                         {/* logout */}
-                      <i className="fa-solid fa-right-from-bracket" onClick={handleLogout} ></i>
+                      <i className="fa-solid fa-right-from-bracket" style={{ color: "#ee3d3d" }} onClick={handleLogout} ></i>
                       </a>
                     </li>
                   </ul>

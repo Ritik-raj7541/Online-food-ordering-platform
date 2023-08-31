@@ -21,7 +21,7 @@ export default function ItemsDetails(props) {
                   {item.name}
                 </h5>
                 <hr />
-                <p className="card-text" key={item.description}>{item.description}</p>
+                {/* <p className="card-text" key={item.description}>{item.description}</p> */}
                 <hr />
                 <ItemsSelection  ItemsDetails = {item} itemPrice={item.options[0]}/>
               </div>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ItemsDetails from "./ItemsDetails";
+import { CartContext} from "../../components/ContextReducer";
 // import aa from "../pictures/carsoule-care.jpg"
 
 export default function Items() {
@@ -19,6 +20,10 @@ export default function Items() {
       })
       .catch((error) => console.error(`Error: $(error)`));
   };
+  const {cart} = useContext(CartContext) ;
+  useEffect(() => {
+    // console.log(cart);
+  }, [cart]);;
 
   return (
     <div className="container custom-container-2">

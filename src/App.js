@@ -4,6 +4,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import { CartProvider } from "./components/ContextReducer";
+import MyCart from "./components/MyCart";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/myCart" element={<MyCart/>} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

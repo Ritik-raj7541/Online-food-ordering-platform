@@ -6,7 +6,7 @@
       font-size: large;
 }
 .navbar{
-      background: #ee2020;
+      background: #ee3d3d;
 }
 .custom-container{
       /* border: 2px solid black; */
@@ -19,10 +19,44 @@
       width: 100%;
       height: 500px;
 }
+.my-cart{
+      margin: auto;
+      padding: 50px 50px
+}
 
 /* for  item details*/
 .container-items{
       padding: auto;
       margin: auto;
 }
+.item-details{
+      border: 2px solid #ee3d3d;
+      border-radius: 9px;
+}
 
+
+/* table contents */
+.table-custome{
+      border: 2px solid black ;
+      border-radius: 5px;
+}
+
+/* Notifications */
+.notification {
+      /* background-color: #555; */
+      color: white;
+      text-decoration: none;
+      padding: 5px 3px;
+      position: relative;
+      display: inline-block;
+      border-radius: 2px;
+    }
+    .notification .badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 5px 10px;
+      border-radius: 50%;
+      /* background: rgb(225, 225, 7); */
+      color: white;
+    }
