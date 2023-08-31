@@ -4,7 +4,7 @@ import Items from '../helpers.js/Items/Items'
 export default function MidSection() {
   return (
     <div>
-       <Items/>
+      <Items/>
     </div>
   )
 }

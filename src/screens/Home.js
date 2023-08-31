@@ -10,7 +10,8 @@ export default function Home() {
       <Navbar />
       <Carousel />
       <div className="container">
-        <MidSection />
+        {/* {console.log("again came")} */}
+        {!localStorage.getItem("authToken") ? ("") : (<MidSection />)}
       </div>
       <Footer />
     </div>

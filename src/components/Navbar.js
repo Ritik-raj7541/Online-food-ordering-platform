@@ -1,17 +1,18 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../components/css/App.css";
-import{CartContext} from './ContextReducer'
+import { CartContext } from "./ContextReducer";
 
 export default function Navbar() {
-  const navigate = useNavigate() ;
-  const handleLogout = () =>{
-    localStorage.removeItem("authToken") ;
-    console.log("deleted");
-    navigate('/') ;
-  }
-  const {cart} = useContext(CartContext) ;
-  
+  let navigate = useNavigate();
+  const handleLogout = async () => {
+    localStorage.removeItem("authToken");
+    console.log("logout");
+    window.location.reload();
+    navigate('/');
+  };
+  const { cart } = useContext(CartContext);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark shadow-5-strong navstyle">
@@ -61,23 +62,43 @@ export default function Navbar() {
                     href="#"
                     role="button"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"   
+                    aria-expanded="false"
                   >
-                    <i className="fa-solid fa-user" style={{ color: "#e3e7ed" }}></i>
-                    {cart.length !==0 ?(<span className="badge">{cart.length}</span>):""}
-                    
+                    <i
+                      className="fa-solid fa-user"
+                      style={{ color: "#e3e7ed" }}
+                    ></i>
+                    {cart.length !== 0 ? (
+                      <span className="badge">{cart.length}</span>
+                    ) : (
+                      ""
+                    )}
                   </Link>
-                  <ul className="dropdown-menu btn btn-secondary " style={{ '--bs-dropdown-min-width': '1rem' }}>
+                  <ul
+                    className="dropdown-menu btn btn-secondary "
+                    style={{ "--bs-dropdown-min-width": "1rem" }}
+                  >
                     <li className="notification">
                       <Link className="dropdown-item" to="/myCart">
-                      <i className="fa-solid fa-cart-shopping" style={{ color: "#ee3d3d" }}></i>
-                      {cart.length !==0 ?(<span className="badge">{cart.length}</span>):""}
+                        <i
+                          className="fa-solid fa-cart-shopping"
+                          style={{ color: "#ee3d3d" }}
+                        ></i>
+                        {cart.length !== 0 ? (
+                          <span className="badge">{cart.length}</span>
+                        ) : (
+                          ""
+                        )}
                       </Link>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
                         {/* logout */}
-                      <i className="fa-solid fa-right-from-bracket" style={{ color: "#ee3d3d" }} onClick={handleLogout} ></i>
+                        <i
+                          className="fa-solid fa-right-from-bracket"
+                          style={{ color: "#ee3d3d" }}
+                          onClick={handleLogout}
+                        ></i>
                       </a>
                     </li>
                   </ul>
