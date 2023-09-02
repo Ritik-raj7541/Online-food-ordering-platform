@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
-import { CartProvider } from "./components/ContextReducer";
+import { CartProvider } from "./components/CartContext";
 import MyCart from "./components/MyCart";
 
 function App() {

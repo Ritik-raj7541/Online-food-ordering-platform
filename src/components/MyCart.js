@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CartContext } from "./ContextReducer";
+import { CartContext } from "./CartContext";
 import Navbar from "./Navbar";
 
 export default function MyCart() {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ItemsDetails from "./ItemsDetails";
-import { CartContext} from "../../components/ContextReducer";
+import { CartContext} from "../../components/CartContext";
 // import aa from "../pictures/carsoule-care.jpg"
 
 export default function Items() {

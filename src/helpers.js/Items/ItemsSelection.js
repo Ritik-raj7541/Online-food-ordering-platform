@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react" ;
-import { CartContext } from "../../components/ContextReducer" ;
+import { CartContext } from "../../components/CartContext" ;
 import { Howl } from "howler" ; 
 import adding from '../../sounds/adding.wav' ;
 
@@ -9,28 +9,16 @@ export default function ItemsSelection(props) {
   const priceOption = Object.keys(options);
   const [qty, setQty] = useState(0);
   const [size, setSize] = useState("");
-  const { addToCart } = useContext(CartContext);
-  // const [total, setTotal] = useState(0) ;
-  
-  // let data = useCart() ;
-  // let dispatch = useDispatchCart() ;
+  const {cart, addToCart } = useContext(CartContext);
   const priceRef = useRef() ;
   useEffect(()=>{
     setSize(priceRef.current.value)
   })
   const totalPrice = qty * parseInt(options[size]) ;
   let total = totalPrice ;
-  // useEffect(()=>{
-  //   console.log(total);
-  //   const totalPrice = qty * parseInt(options[size])
-  //   setTotal(totalPrice) 
-  // },[qty || size])
 
-  const handleItemAdding = async () => {
-    // console.log(itemsDetails._id);
-    // await dispatch({type: "ADD", id: itemsDetails._id, name: itemsDetails.name, price:3, qty: qty, size: size, img: itemsDetails.img})
-    // console.log(data);
-    if(qty ===0) return ;
+
+  const addingToCart = async() => {
     await addToCart({
       type: "ADD",
       id: itemsDetails._id,
@@ -40,6 +28,43 @@ export default function ItemsSelection(props) {
       size: size,
       img: itemsDetails.img,
     });
+  } ;
+  const updateToCart = async() =>{
+    await addToCart({
+      type: "UPDATE",
+      id: itemsDetails._id,
+      price: total,
+      qty: qty,
+      size: size,
+    }) ;
+  }
+  const handleItemAdding = async () => {
+    if(qty ===0) return ;
+    //trying to update
+    let food = [] ;
+    for(const item of cart){
+      if(item.id === itemsDetails._id && item.size === size){
+        food = item ;
+        break;
+      }
+    }
+    console.log(food);
+    if(food !==[]){
+      if(food.size === size){
+        //update
+        updateToCart() ;
+        return
+      }else if(food.size !== size){
+        //add
+        addingToCart() ;
+        return 
+      }
+      return ;
+    }
+    // console.log(itemsDetails._id);
+
+    addingToCart() ;
+    return ;
   };
   const handleSound = () =>{
 
