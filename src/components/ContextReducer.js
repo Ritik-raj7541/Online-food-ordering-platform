@@ -9,6 +9,12 @@ export const CartProvider = ({children}) => {
          switch (product.type) {
             case "ADD":
                   return setCart([...cart, {id: product.id, name: product.name, price: product.price, qty: product.qty, size: product.size, img: product.img}]) ;         
+            case "DELETE":
+                  let newArray = [...cart] ;
+                  newArray.splice(product.index, 1) ;
+                  console.log(product.index," -> ", newArray);
+                  return setCart(newArray) ;
+            case "UPDATE":
             default:
                   break;
          }

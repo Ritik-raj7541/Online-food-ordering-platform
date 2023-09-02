@@ -30,6 +30,7 @@ export default function ItemsSelection(props) {
     // console.log(itemsDetails._id);
     // await dispatch({type: "ADD", id: itemsDetails._id, name: itemsDetails.name, price:3, qty: qty, size: size, img: itemsDetails.img})
     // console.log(data);
+    if(qty ===0) return ;
     await addToCart({
       type: "ADD",
       id: itemsDetails._id,
