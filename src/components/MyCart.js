@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 
 export default function MyCart() {
   const { cart, addToCart } = useContext(CartContext);
+  let totalPrice = cart.reduce((total, food) =>total + food.price, 0) ;
   const handleDeletion = async (index) => {
     await addToCart({
       type: "DELETE",
@@ -17,6 +18,7 @@ export default function MyCart() {
       <div className="container my-cart">
         <h1 style={{ color: "#FFFFFF" }}>My Cart</h1>
         {cart.length ? (
+          <div>
           <table className="table table-custome table-dark">
             <thead>
               <tr>
@@ -47,6 +49,13 @@ export default function MyCart() {
               ))}
             </tbody>
           </table>
+          <div className="fs-2 row">
+            <div className="col-4 total-price mx-2">Total Price: ₹ {totalPrice} /-</div>
+            <div className="col-4 check-out mx-2">Check Out</div>
+          </div>
+          
+          </div>
+          
         ) : (
           <div className="container">Cart is Empty!!</div>
         )}
