@@ -101,3 +101,22 @@
 .footer-custom{
       color: white;
 }
+
+/* hr */
+.hr{
+      /* margin-top: 10px; */
+      width: 30%;
+      border:10px dotted rgb(218, 210, 210) ;
+      border-bottom: none ;
+      margin: auto;
+}
+.about{
+      background-color: rgb(243, 57, 57);
+      filter: blur(1px);
+      -webkit-filter: blur(1px);
+      border: 2px solid white;
+      border-radius: 5px;
+      padding: 10px 10px ;
+      color: white;
+      font-style: oblique;
+}
