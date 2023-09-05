@@ -35,6 +35,9 @@ export const CartProvider = ({ children }) => {
           }
         });
         return setCart(arr) ;
+      case "DROP":
+        let newArr = [] ;
+        return setCart(newArr) ;
       default:
         break;
     }

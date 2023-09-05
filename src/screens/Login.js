@@ -8,6 +8,10 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setcredentials({ ...credentials, [name]: value });
+  };
   const handleSubmission = async (e) => {
     e.preventDefault();
     const response = await axios.post(
@@ -16,13 +20,11 @@ export default function Login() {
     );
     if(response.status === 200){
       localStorage.setItem("authToken",response.data.accessToken) ;
+      localStorage.setItem("userEmail", credentials.email) ;
       navigate('/') ;
     }
   };
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setcredentials({ ...credentials, [name]: value });
-  };
+ 
 
   return (
     <div className="container">

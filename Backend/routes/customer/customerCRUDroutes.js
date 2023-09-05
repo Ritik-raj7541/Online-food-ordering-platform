@@ -1,8 +1,9 @@
 const express = require('express') ;
-const { getMenu } = require('../../controllers/customer/customerCRUDcontrollers');
+const { getMenu, checkOut } = require('../../controllers/customer/customerCRUDcontrollers');
 const validateToken = require('../../middleware/validateTokenHandler');
 const router = express.Router() ;
 
-router.route('/getItem', validateToken).get(getMenu) ;
+router.route('/get-item', validateToken).get(getMenu) ;
+router.route('/check-out', validateToken).post(checkOut) ;
 
 module.exports = router ;

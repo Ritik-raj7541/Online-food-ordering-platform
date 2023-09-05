@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "./CartContext";
 import Navbar from "./Navbar";
+import axios from "axios";
 
 export default function MyCart() {
   const { cart, addToCart } = useContext(CartContext);
@@ -12,6 +13,25 @@ export default function MyCart() {
     }) ;
     // console.log(cart);
   };
+  const handleCheckOut = async () => {
+      const email = localStorage.getItem("userEmail") ;
+      // console.log(userEmail);
+      const dataForCheckOut = {
+        email,
+        cart
+      } ;
+      const response = await axios.post(
+        "http://localhost:5000/api/customer/check-out",
+         dataForCheckOut
+      ) ;
+      if(response.status == 200){
+        await addToCart({
+          type:"DROP",
+        }) ;
+      }else{
+        console.log("not done");
+      }
+  } ;
   return (
     <>
     <Navbar/>
@@ -51,7 +71,7 @@ export default function MyCart() {
           </table>
           <div className="fs-2 row">
             <div className="col-4 total-price mx-2">Total Price: ₹ {totalPrice} /-</div>
-            <div className="col-4 check-out mx-2">Check Out</div>
+            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Check Out</div>
           </div>
           
           </div>

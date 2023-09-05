@@ -5,7 +5,7 @@ import { CartContext} from "../../components/CartContext";
 // import aa from "../pictures/carsoule-care.jpg"
 
 export default function Items() {
-  const url = "http://localhost:5000/api/customer/getItem";
+  const url = "http://localhost:5000/api/customer/get-item";
   const [foodItems, getfoodItems] = useState([]);
   useEffect(() => {
     getAllFoodItems();
