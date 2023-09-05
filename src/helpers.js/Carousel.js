@@ -31,34 +31,34 @@ export default function Staters() {
           ></button>
         </div>
         <div className="carousel-inner">
+          <div className="carousel-caption d-none d-md-block" style={{zIndex:"10"}}>
+            <Search />
+          </div>
           <div className="carousel-item active">
             <img src={a} className="d-block carousel-image" alt="pic_1" />
-            <div className="carousel-caption d-none d-md-block">
+            <div className="carousel-caption custom-caption">
               <h5>We Serve</h5>
               {/* <p>
                 Some representative placeholder content for the first slide.
               </p> */}
-              <Search/>
             </div>
           </div>
           <div className="carousel-item">
             <img src={b} className="d-block carousel-image" alt="pic_2" />
-            <div className="carousel-caption d-none d-md-block">
+            <div className="carousel-caption custom-caption">
               <h5>We Deliver</h5>
               {/* <p>
                 Some representative placeholder content for the second slide.
               </p> */}
-              <Search/>
             </div>
           </div>
           <div className="carousel-item">
             <img src={c} className="d-block carousel-image" alt="pic_3" />
-            <div className="carousel-caption d-none d-md-block">
+            <div className="carousel-caption custom-caption">
               <h5>We Care</h5>
               {/* <p>
                 Some representative placeholder content for the third slide.
               </p> */}
-              <Search/>
             </div>
           </div>
         </div>

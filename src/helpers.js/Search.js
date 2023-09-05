@@ -11,8 +11,8 @@ export default function Search() {
           aria-label="Search"
           aria-describedby="search-addon"
         />
-        <span className="input-group-text border-0 " id="search-addon">
-        <i className="fa-solid fa-magnifying-glass"></i>
+        <span className=" search-button mx-2" id="search-addon">
+        <i className="fa-solid fa-magnifying-glass fa-2xl" style={{color: "#ee3d3d"}}></i>
         </span>
       </div>
     </div>
