@@ -92,3 +92,12 @@
 .custom-caption{
       margin-bottom: 50px;
 }
+
+/* footer  */
+.footer{
+      padding: 4px 4px;
+      margin: 3px 3px;
+}
+.footer-custom{
+      color: white;
+}
