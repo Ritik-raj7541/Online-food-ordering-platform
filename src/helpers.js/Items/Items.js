@@ -29,7 +29,7 @@ export default function Items() {
     <div className="container custom-container-2">
       {foodItems.map(([categoryName, items]) => (
         <div key={categoryName}>
-          <h2 className="mx-2 my-4">{categoryName}</h2>
+          <h2 className="mx-2 my-4 category-name">{categoryName}</h2>
           <div className="item-list">
             <ItemsDetails items={items} />
           </div>

@@ -126,7 +126,7 @@ export default function ItemsSelection(props) {
           <i
             onClick={handleClick}
             className="fa-solid fa-cart-shopping fa-2xl"
-            style={{ color: "#ee3d3d" }}
+            style={{ color: "#176B87" }}
           ></i>
           {/* <i className="fa-solid fa-cart-circle-check" style={{color: "#ee2020"}}></i> */}
         </div>

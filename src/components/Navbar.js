@@ -82,7 +82,7 @@ export default function Navbar() {
                       <Link className="dropdown-item" to="/myCart">
                         <i
                           className="fa-solid fa-cart-shopping"
-                          style={{ color: "#ee3d3d" }}
+                          style={{ color: "#176B87" }}
                         ></i>
                         {cart.length !== 0 ? (
                           <span className="badge">{cart.length}</span>
@@ -96,7 +96,7 @@ export default function Navbar() {
                         {/* logout */}
                         <i
                           className="fa-solid fa-right-from-bracket"
-                          style={{ color: "#ee3d3d" }}
+                          style={{ color: "#176B87" }}
                           onClick={handleLogout}
                         ></i>
                       </a>

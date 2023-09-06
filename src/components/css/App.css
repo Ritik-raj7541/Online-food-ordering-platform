@@ -6,7 +6,8 @@
       font-size: large;
 }
 .navbar{
-      background: #ee3d3d;
+      background: #053B50;
+      /* #176B87 */
 }
 .custom-container{
       /* border: 2px solid black; */
@@ -30,15 +31,15 @@
       margin: auto;
 }
 .item-details{
-      border: 2px solid #ee3d3d;
+      border: 2px solid #176B87;
       border-radius: 9px;
 }
 
 
 /* table contents */
-.table-custome{
+/* .table-custome{
       
-}
+} */
 
 /* Notifications */
 .notification {
@@ -80,9 +81,9 @@
 }
 
 /* search */
-.search{
+/* .search{
 
-}
+} */
 .search-button{
       padding: 4px 4px;
       /* background-color: white; */
@@ -111,7 +112,7 @@
       margin: auto;
 }
 .about{
-      background-color: rgb(243, 57, 57);
+      background-color: #176B87;
       filter: blur(1px);
       -webkit-filter: blur(1px);
       border: 2px solid white;
@@ -119,4 +120,9 @@
       padding: 10px 10px ;
       color: white;
       font-style: oblique;
+}
+
+/* item name */
+.category-name{
+      color: #053B50;;
 }

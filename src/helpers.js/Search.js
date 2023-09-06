@@ -12,7 +12,7 @@ export default function Search() {
           aria-describedby="search-addon"
         />
         <span className=" search-button mx-2" id="search-addon">
-        <i className="fa-solid fa-magnifying-glass fa-2xl" style={{color: "#ee3d3d"}}></i>
+        <i className="fa-solid fa-magnifying-glass fa-2xl" style={{color: "#176B87"}}></i>
         </span>
       </div>
     </div>
