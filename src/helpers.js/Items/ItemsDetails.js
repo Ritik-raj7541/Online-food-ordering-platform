@@ -8,7 +8,7 @@ export default function ItemsDetails(props) {
       <div className="row">
         {items.map((item) => (
           <div className="col">
-            <div className="card mx-2 my-2" style={{ width: "18rem" }}>
+            <div className="card mx-2 my-2" style={{ width: "18rem", background:"antiquewhite" }}>
               <img
                 src={item.img}
                 alt={item.name}

@@ -126,3 +126,41 @@
 .category-name{
       color: #053B50;;
 }
+
+/* login container */
+.entry-container{
+      margin-top: 10%;
+}
+.logo-container{
+      text-align: center;
+      /* width: auto; */
+}
+.login-container{
+      
+      /* top: 50%;
+      left: 50%; */
+      width: 40%;
+      border: 2px solid black;
+      border-radius: 10px;
+      padding: 1px 1px;
+      text-align: center;
+      background-color: antiquewhite;
+}
+.input{
+      text-align: center;
+      width: 50%;
+      /* margin:auto 10px; */
+      border-radius: 4px;
+      padding: 1px 1px;
+      background-color:#64CCC5;
+      color: white;
+}
+.login-image{
+      z-index: 10;
+      width: 7%;
+      height: 7%;
+      border: 2px solid black;
+      border-radius: 50%;
+      background-color: antiquewhite;
+      padding: 3px;
+}

@@ -76,7 +76,8 @@ export default function Navbar() {
                   </Link>
                   <ul
                     className="dropdown-menu btn btn-secondary "
-                    style={{ "--bs-dropdown-min-width": "1rem" }}
+                    style={{ "--bs-dropdown-min-width": "1rem", background:"antiquewhite" }}
+              
                   >
                     <li className="notification">
                       <Link className="dropdown-item" to="/myCart">

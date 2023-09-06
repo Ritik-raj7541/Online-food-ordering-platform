@@ -79,7 +79,6 @@ export default function ItemsSelection(props) {
     await handleItemAdding() ;
   } ;
 
-
   return (
     <div>
       <div className="container row">
@@ -88,6 +87,7 @@ export default function ItemsSelection(props) {
             name=""
             id=""
             className="item-details"
+            style={{background:"antiquewhite"}}
             onChange={(e) => setQty(e.target.value)}
           >
             {Array.from(Array(10), (e, i) => {
@@ -106,12 +106,13 @@ export default function ItemsSelection(props) {
             id=""
             className="item-details"
             ref={priceRef}
+            style={{background:"antiquewhite"}}
             onChange={(e) => setSize(e.target.value)}
           >
             {priceOption.map((data) => {
               if (data !== "_id")
                 return (
-                  <option key={data} value={data}>
+                  <option key={data} value={data} >
                     {data}
                   </option>
                 );
