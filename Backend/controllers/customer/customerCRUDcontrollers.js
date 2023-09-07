@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler') ;
 const foodItems = require('../../models/foods/foodItems') ;
 const foodCategorys = require('../../models/foods/foodCategory') ;
 const Orders = require('../../models/orders') ;
+const User = require('../../models/customer') ;
 //1.
 //GET - api/customer/get-item
 const getMenu = asyncHandler (async (req, res) =>{
@@ -52,6 +53,35 @@ const checkOut = asyncHandler(async (req, res) => {
       }
 
 
-})
+}) ;
 
-module.exports = {getMenu, checkOut} ;
+// 3. to get user profile .
+//GET - api/customer/get-my-details
+const myDetails = asyncHandler( async(req, res) =>{
+      const {email} = req.body ;
+      // console.log("email -> ",email);
+      const user = await User.findOne({email}) ;
+      const orders = await Orders.findOne({email}) ;
+      // console.log(orders.orderData);
+      // let orderHistory = [];
+      let userCompleteDetails = {
+            name: user.name,
+            address:"",
+            orderHistory:[],
+      }
+      if(orders){
+            userCompleteDetails = {
+                  name: user.name,
+                  address:"",
+                  orderHistory: orders.orderData,
+            }  
+      }
+      if(user){
+            res.status(200).json(userCompleteDetails) ;
+      }else{
+            // res.status(400).json({message:"No user Found"}) ;
+      }
+      
+}) ;
+
+module.exports = {getMenu, checkOut, myDetails} ;

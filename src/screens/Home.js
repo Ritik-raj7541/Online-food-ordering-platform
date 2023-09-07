@@ -6,6 +6,7 @@ import MidSection from "../components/MidSection";
 import AboutUs from "../components/AboutUs";
 
 export default function Home() {
+  console.log("we are at home");
   return (
     <div>
       <Navbar />

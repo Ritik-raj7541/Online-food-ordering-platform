@@ -1,0 +1,95 @@
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import a from "../pictures/delivery-boy.png";
+import axios from "axios";
+
+export default function MyProfile() {
+  const [user, setuser] = useState(null);
+  const email = localStorage.getItem("userEmail");
+  const dataForDetails = {
+    email,
+  };
+  const capital = (text) => {
+    let a = text[0].toUpperCase() + text.slice(1);
+    return a;
+  };
+  const fetchUserData = async () => {
+    const response = await axios.post(
+      "http://localhost:5000/api/customer/get-my-details",
+      dataForDetails
+    );
+    if (response.status === 200) {
+      setuser(response.data);
+      // console.log(user);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    // fetchUserData();
+    if (user !== null) console.log(user.orderHistory);
+  }, [user]);
+
+  return (
+    <>
+      <Navbar />
+      <div className="container profile">
+        <div className="row">
+          <div className="col col-lg-2">
+            <img src={a} alt="" className="profile-image" />
+          </div>
+          {user !== null ? (
+            <ul className="col">
+              <li>Name: {capital(user.name)} </li>
+              <li>Name: </li>
+              <li>Name: </li>
+            </ul>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+      order
+      <div className="container profile my-3">
+        {user !== null && user.orderHistory.length !== 0
+          ? user.orderHistory.map((order) => (
+              //  order.map((items) => (
+              //   <div className="container  row">
+              //     <div className="items col-2 my-2" key={1}>
+              //       <img src={items.img} alt="" className="history-image"/>
+              //     </div>
+              //     <div className="items col-2" key={1}>{items.name}</div>
+              //     <div className="items col-1" key={1}>{items.qty}</div>
+              //     <div className="items col-1" key={1}>₹ {items.price} /-</div>
+              //     <div className="items col-1" key={1}>status</div>
+              //   </div>
+              //  ))
+              <div className="container packet my-3">
+                {order.map((items) => (
+                  <div className="container  row">
+                    <div className="items col-2 my-2" key={1}>
+                      <img src={items.img} alt="" className="history-image" />
+                    </div>
+                    <div className="items col-2" key={1}>
+                      {items.name}
+                    </div>
+                    <div className="items col-1" key={1}>
+                      {items.qty}
+                    </div>
+                    <div className="items col-1" key={1}>
+                      ₹ {items.price} /-
+                    </div>
+                    <div className="items col-1" key={1}>
+                      status
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          : "No order History"}
+      </div>
+    </>
+  );
+}

@@ -7,8 +7,9 @@ export default function Navbar() {
   let navigate = useNavigate();
   const handleLogout = async () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userEmail") ;
     console.log("logout");
-    window.location.reload();
+    // window.location.reload();
     navigate('/');
   };
   const { cart } = useContext(CartContext);
@@ -79,6 +80,12 @@ export default function Navbar() {
                     style={{ "--bs-dropdown-min-width": "1rem", background:"antiquewhite" }}
               
                   >
+                    <li>
+                      <Link className="dropdown-item" to="/myProfile">
+                        {/* logout */}
+                        <i className="fa-regular fa-user" style={{color: "#176B87"}}></i>
+                      </Link>
+                    </li>
                     <li className="notification">
                       <Link className="dropdown-item" to="/myCart">
                         <i
@@ -93,7 +100,7 @@ export default function Navbar() {
                       </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a className="dropdown-item" herf="#">
                         {/* logout */}
                         <i
                           className="fa-solid fa-right-from-bracket"
