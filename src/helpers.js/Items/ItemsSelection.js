@@ -49,7 +49,7 @@ export default function ItemsSelection(props) {
       }
     }
     console.log(food);
-    if(food !==[]){
+    if(food !== []){
       if(food.size === size){
         //update
         updateToCart() ;
