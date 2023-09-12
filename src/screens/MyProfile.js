@@ -41,31 +41,24 @@ export default function MyProfile() {
             <img src={a} alt="" className="profile-image" />
           </div>
           {user !== null ? (
-            <ul className="col">
-              <li>Name: {capital(user.name)} </li>
-              <li>Name: </li>
-              <li>Name: </li>
+            <ul className="col" style={{listStyleType:"none"}}>
+              <li>Name : {capital(user.name)} </li>
+              <li>Phone No : </li>
+              <li>Address :</li>
             </ul>
           ) : (
             ""
           )}
         </div>
       </div>
-      order
+      <div className="container my-3" >
+         <h1>Order History : </h1>
+      </div>
+      
       <div className="container profile my-3">
         {user !== null && user.orderHistory.length !== 0
           ? user.orderHistory.map((order) => (
-              //  order.map((items) => (
-              //   <div className="container  row">
-              //     <div className="items col-2 my-2" key={1}>
-              //       <img src={items.img} alt="" className="history-image"/>
-              //     </div>
-              //     <div className="items col-2" key={1}>{items.name}</div>
-              //     <div className="items col-1" key={1}>{items.qty}</div>
-              //     <div className="items col-1" key={1}>₹ {items.price} /-</div>
-              //     <div className="items col-1" key={1}>status</div>
-              //   </div>
-              //  ))
+
               <div className="container packet my-3">
                 {order.map((items) => (
                   <div className="container  row">

@@ -24,7 +24,7 @@ export default function MyCart() {
         "http://localhost:5000/api/customer/check-out",
          dataForCheckOut
       ) ;
-      if(response.status == 200){
+      if(response.status === 200){
         await addToCart({
           type:"DROP",
         }) ;
@@ -71,7 +71,13 @@ export default function MyCart() {
           </table>
           <div className="fs-2 row">
             <div className="col-4 total-price mx-2">Total Price: ₹ {totalPrice} /-</div>
-            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Check Out</div>
+            {/* <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Check Out</div>
+            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Check Out</div> */}
+          </div>
+          <div className="fs-2 row my-3">
+            {/* <div className="col-4 total-price mx-2">Total Price: ₹ {totalPrice} /-</div> */}
+            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Pay Now</div>
+            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Cash On Delivery</div>
           </div>
           
           </div>
