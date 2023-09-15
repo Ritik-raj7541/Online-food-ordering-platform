@@ -1,40 +1,39 @@
 /* custome css */
-.navfont{
-      font-family:sans-serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: large;
+.navfont {
+  font-family: sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: large;
 }
-.navbar{
-      background: #053B50;
-      /* #176B87 */
+.navbar {
+  background: #053b50;
+  /* #176B87 */
 }
-.custom-container{
-      /* border: 2px solid black; */
-      padding: 0px 15px;
+.custom-container {
+  /* border: 2px solid black; */
+  padding: 0px 15px;
 }
-.custom-container-2{
-      padding: 15px 5px;
+.custom-container-2 {
+  padding: 15px 5px;
 }
-.carousel-image{
-      width: 100%;
-      height: 500px;
+.carousel-image {
+  width: 100%;
+  height: 500px;
 }
-.my-cart{
-      margin: auto;
-      padding: 50px 50px
+.my-cart {
+  margin: auto;
+  padding: 50px 50px;
 }
 
 /* for  item details*/
-.container-items{
-      padding: auto;
-      margin: auto;
+.container-items {
+  padding: auto;
+  margin: auto;
 }
-.item-details{
-      border: 2px solid #176B87;
-      border-radius: 9px;
+.item-details {
+  border: 2px solid #176b87;
+  border-radius: 9px;
 }
-
 
 /* table contents */
 /* .table-custome{
@@ -43,151 +42,156 @@
 
 /* Notifications */
 .notification {
-      /* background-color: #555; */
-      color: white;
-      text-decoration: none;
-      padding: 1px 1px;
-      position: relative;
-      display: inline-block;
-      border-radius: 1px;
-    }
-    .notification .badge {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      padding: 5px 10px;
-      border-radius: 50%;
-      /* background: rgb(225, 225, 7); */
-      color: white;
-    }
-.total-price{
-      /* margin-left: 68%; */
-      padding: 2px;
-      border: 2px solid black;
-      border-radius: 15px;
-      background-color: rgb(29, 27, 27);
-      color: white;
-      width: auto;
+  /* background-color: #555; */
+  color: white;
+  text-decoration: none;
+  padding: 1px 1px;
+  position: relative;
+  display: inline-block;
+  border-radius: 1px;
 }
-.check-out{
-      border: 2px solid black;
-      border-radius: 15px;
-      background-color: rgb(29, 27, 27);
-      color: white;
-      width: auto;
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  /* background: rgb(225, 225, 7); */
+  color: white;
 }
-.check-out:hover{
-      cursor: grab;
+.total-price {
+  /* margin-left: 68%; */
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: rgb(29, 27, 27);
+  color: white;
+  width: auto;
+}
+.check-out {
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: rgb(29, 27, 27);
+  color: white;
+  width: auto;
+}
+.check-out:hover {
+  cursor: grab;
 }
 
 /* search */
 /* .search{
 
 } */
-.search-button{
-      padding: 4px 4px;
-      /* background-color: white; */
-      /* border: 2px solid black ; */
-      border-radius: 9px;
+.search-button {
+  padding: 4px 4px;
+  /* background-color: white; */
+  /* border: 2px solid black ; */
+  border-radius: 9px;
 }
-.custom-caption{
-      margin-bottom: 50px;
+.custom-caption {
+  margin-bottom: 50px;
 }
 
 /* footer  */
-.footer{
-      padding: 4px 4px;
-      margin: 3px 3px;
+.footer {
+  padding: 4px 4px;
+  margin: 3px 3px;
 }
-.footer-custom{
-      color: white;
+.footer-custom {
+  color: white;
 }
 
 /* hr */
-.hr{
-      /* margin-top: 10px; */
-      width: 30%;
-      border:10px dotted rgb(218, 210, 210) ;
-      border-bottom: none ;
-      margin: auto;
+.hr {
+  /* margin-top: 10px; */
+  width: 30%;
+  border: 10px dotted rgb(218, 210, 210);
+  border-bottom: none;
+  margin: auto;
 }
-.about{
-      background-color: #176B87;
-      filter: blur(1px);
-      -webkit-filter: blur(1px);
-      border: 2px solid white;
-      border-radius: 5px;
-      padding: 10px 10px ;
-      color: white;
-      font-style: oblique;
+.about {
+  background-color: #176b87;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 10px;
+  color: white;
+  font-style: oblique;
 }
 
 /* item name */
-.category-name{
-      color: #053B50;;
+.category-name {
+  color: #053b50;
 }
 
 /* login container */
-.entry-container{
-      margin-top: 10%;
+.entry-container {
+  margin-top: 10%;
 }
-.logo-container{
-      text-align: center;
-      /* width: auto; */
+.logo-container {
+  text-align: center;
+  /* width: auto; */
 }
-.login-container{
-      
-      /* top: 50%;
+.login-container {
+  /* top: 50%;
       left: 50%; */
-      width: 40%;
-      border: 2px solid black;
-      border-radius: 10px;
-      padding: 1px 1px;
-      text-align: center;
-      background-color: antiquewhite;
+  width: 40%;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 1px 1px;
+  text-align: center;
+  background-color: antiquewhite;
 }
-.input{
-      text-align: center;
-      width: 50%;
-      /* margin:auto 10px; */
-      border-radius: 4px;
-      padding: 1px 1px;
-      background-color:#64CCC5;
-      color: white;
+.input {
+  text-align: center;
+  width: 50%;
+  /* margin:auto 10px; */
+  border-radius: 4px;
+  padding: 1px 1px;
+  background-color: #64ccc5;
+  color: white;
 }
-.login-image{
-      z-index: 10;
-      width: 7%;
-      height: 7%;
-      border: 2px solid black;
-      border-radius: 50%;
-      background-color: antiquewhite;
-      padding: 3px;
+.login-image {
+  z-index: 10;
+  width: 7%;
+  height: 7%;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: antiquewhite;
+  padding: 3px;
 }
-
 
 /* profile */
-.profile{
-      border: 2px solid black;
-      margin-top: 3%;
-      padding: 10px 10px ;
-      border-radius: 8px;
-      background-color: antiquewhite;
+.profile {
+  border: 2px solid black;
+  margin-top: 3%;
+  padding: 10px 10px;
+  border-radius: 8px;
+  background-color: antiquewhite;
 }
-.profile-image{
-      width: 50%;
-      height: 100%;
-      border: 2px solid black;
-      border-radius: 50%;
+.profile-image {
+  width: 50%;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 50%;
 }
-.history-image{
-      width: 50%;
-      height: 70%;
-      border: 1px solid black;
-      border-radius: 4px;
+.history-image {
+  width: 50%;
+  height: 70%;
+  border: 1px solid black;
+  border-radius: 4px;
 }
-.packet{
-      border: 2px solid black;
-      border-radius: 4px;
-      padding: 5px 5px;
+.packet {
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 5px 5px;
+}
+
+/* for admin */
+.admin-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
