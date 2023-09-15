@@ -93,7 +93,7 @@ export default function Navbar() {
                           style={{ color: "#176B87" }}
                         ></i>
                         {cart.length !== 0 ? (
-                          <span className="badge">{cart.length}</span>
+                          <span className="badge" style={{ color: "#176B87" }} >{cart.length}</span>
                         ) : (
                           ""
                         )}

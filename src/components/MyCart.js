@@ -2,10 +2,18 @@ import React, { useContext } from "react";
 import { CartContext } from "./CartContext";
 import Navbar from "./Navbar";
 import axios from "axios";
+// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 
 export default function MyCart() {
+
+  // const stripePromise = loadStripe(process.env.STRIPE_API_KEY) ;
+  // const stripe = useStripe() ;
+  // const elements = useElements() ;
   const { cart, addToCart } = useContext(CartContext);
   let totalPrice = cart.reduce((total, food) =>total + food.price, 0) ;
+
+
   const handleDeletion = async (index) => {
     await addToCart({
       type: "DELETE",
@@ -31,6 +39,21 @@ export default function MyCart() {
       }else{
         console.log("not done");
       }
+  } ;
+  const handlePayNow = async(event) =>{
+    event.preventDefault() ;
+    // console.log(stripe);
+    // console.log(elements);
+    // const {error, paymentMethod} = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: elements.getElement(CardElement),
+    // }) ;
+    // console.log("ritik");
+    // if(error){
+    //   console.log('[error]',error);
+    // }else{
+    //   console.log(['PaymentMethod'], paymentMethod);
+    // }
   } ;
   return (
     <>
@@ -76,7 +99,7 @@ export default function MyCart() {
           </div>
           <div className="fs-2 row my-3">
             {/* <div className="col-4 total-price mx-2">Total Price: ₹ {totalPrice} /-</div> */}
-            <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Pay Now</div>
+            <div className="col-4 check-out mx-2" onClick={handlePayNow}>Pay Now</div>
             <div className="col-4 check-out mx-2" onClick={handleCheckOut}>Cash On Delivery</div>
           </div>
           

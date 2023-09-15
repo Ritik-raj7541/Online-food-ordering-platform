@@ -10,19 +10,20 @@ import { SearchProvider } from "./components/SearchContext";
 
 function App() {
   return (
-    <SearchProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
-            <Route exact path="/myCart" element={<MyCart />} />
-            <Route exact path="/myProfile" element={<MyProfile />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </SearchProvider>
+      <SearchProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
+              <Route exact path="/myCart" element={<MyCart />} />
+              <Route exact path="/myProfile" element={<MyProfile />} />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </SearchProvider>
+    
   );
 }
 
