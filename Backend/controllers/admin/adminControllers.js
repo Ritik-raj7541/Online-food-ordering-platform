@@ -17,4 +17,13 @@ const postRegister = asyncHandler (async (req, res) =>{
       res.status(200).json(newAdmin) ;
 }) ;
 
+//post method to login user
+const postLogin = asyncHandler (async(req, res) =>{
+      const {email, password, adminKey} = req.body ;
+      if(!email || !password){
+            res.status(400) ;
+            throw new Error("All fields are mandatory!") ;
+      }
+}) ;
+
 module.exports = {postRegister} ;

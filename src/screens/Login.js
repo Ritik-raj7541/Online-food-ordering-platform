@@ -15,7 +15,7 @@ export default function Login() {
     password: "",
     adminkey: "",
   });
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState(false); //telling if user is admin or not
   const handleAdminToggle = (e) => {
     // console.log(e.target.value);
     setAdmin(!admin);
@@ -31,7 +31,7 @@ export default function Login() {
  
   const onChange = (e) => {
     const { name, value } = e.target;
-    console.log(admin);
+    // console.log(admin);
     if (admin === false) {
       setcredentials({ ...credentials, [name]: value }); // Uwpdate credentials
       console.log(credentials.email);

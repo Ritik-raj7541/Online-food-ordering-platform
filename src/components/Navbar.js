@@ -8,7 +8,6 @@ export default function Navbar() {
   const handleLogout = async () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userEmail") ;
-    console.log("logout");
     // window.location.reload();
     navigate('/');
   };

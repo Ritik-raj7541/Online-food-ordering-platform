@@ -24,7 +24,7 @@ const postRegister = asyncHandler (async (req, res) =>{
             password: hashPassword,
       }) ;
       if(newCustomer){
-            res.status(201).json({ _id:newCustomer.id, email: newCustomer.email}) ;
+            res.status(200).json({ _id:newCustomer.id, email: newCustomer.email}) ;
       }else{
             res.status(400) ;
             throw new Error("User data not valid") ;

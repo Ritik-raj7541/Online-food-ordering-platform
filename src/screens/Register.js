@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import a from "../pictures/delivery-boy.png"
 import axios from "axios";
 
+
 export default function Register() {
+  let navigate = useNavigate();
   const [credentials, setcredentials] = useState({
     name: "",
     email: "",
@@ -15,7 +17,13 @@ export default function Register() {
       "http://localhost:5000/api/customer/register",
       credentials
     );
-    console.log(response);
+    console.log(response.status);
+    if (response.status === 200) {
+      console.log("status done");
+      localStorage.setItem("authToken", response.data.accessToken);
+      localStorage.setItem("userEmail", credentials.email);
+      navigate("/");
+    }
   };
   const onChange = (e) => {
     const { name, value } = e.target;
