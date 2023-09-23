@@ -26,7 +26,7 @@ const postRegister = asyncHandler (async (req, res) =>{
       if(newCustomer){
             res.status(200).json({ _id:newCustomer.id, email: newCustomer.email}) ;
       }else{
-            res.status(400) ;
+            res.status(401) ;
             throw new Error("User data not valid") ;
       }
 }) ;
@@ -50,8 +50,8 @@ const postLogin = asyncHandler( async(req, res)=>{
             ) ;
             res.status(200).json({accessToken}) ;
       }else{
-            res.status(400) ;
-            throw new Error('email or password is not valid') ;
+            res.status(401) ;
+            throw new Error("User not Valid") ;
       }
 }) ;
 

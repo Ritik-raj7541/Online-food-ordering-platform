@@ -11,19 +11,28 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const [loginError, setloginError] = useState("")
   const handleSubmission = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:5000/api/customer/register",
-      credentials
-    );
-    console.log(response.status);
-    if (response.status === 200) {
-      console.log("status done");
-      localStorage.setItem("authToken", response.data.accessToken);
-      localStorage.setItem("userEmail", credentials.email);
-      navigate("/");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/customer/register",
+        credentials
+      );
+      // console.log(response.status);
+      if (response.status === 200) {
+        console.log("status done");
+        localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("userEmail", credentials.email);
+        setloginError("") ;
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setloginError("*User with same email id already exist please try different email id");
+      }
     }
+    
   };
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -75,7 +84,7 @@ export default function Register() {
                 onChange={onChange}
               />
             </div>
-
+            <div className="container" style={{color:"red"}}>{loginError}</div>
             <button type="submit" className="btn my-3">
               Submit
             </button>

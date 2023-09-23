@@ -16,6 +16,7 @@ export default function Login() {
     adminkey: "",
   });
   const [admin, setAdmin] = useState(false); //telling if user is admin or not
+  const [loginError, setloginError] = useState("");
   const handleAdminToggle = (e) => {
     // console.log(e.target.value);
     setAdmin(!admin);
@@ -28,36 +29,40 @@ export default function Login() {
   // useEffect(() => {
   //   console.log(credentialsadmin);
   // }, [credentialsadmin]) ;
- 
+
   const onChange = (e) => {
     const { name, value } = e.target;
     // console.log(admin);
     if (admin === false) {
       setcredentials({ ...credentials, [name]: value }); // Uwpdate credentials
-      console.log(credentials.email);
+      // console.log(credentials.email);
     } else {
       setcredentialsadmin({ ...credentialsadmin, [name]: value }); // Update credentialsadmin
-      console.log(credentialsadmin.email);
+      // console.log(credentialsadmin.email);
     }
   };
-  
 
   const handleSubmissionForCustomer = async () => {
-    const response = await axios.post(
-      "http://localhost:5000/api/customer/login",
-      credentials
-    );
-    if (response.status === 200) {
-      localStorage.setItem("authToken", response.data.accessToken);
-      localStorage.setItem("userEmail", credentials.email);
-      navigate("/");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/customer/login",
+        credentials
+      );
+      if (response.status === 200) {
+        localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("userEmail", credentials.email);
+        setloginError("");
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setloginError("*enter the valid credentials");
+      }
     }
   };
   const handleSubmissionForAdmin = async () => {
     // console.log("admin");
-    const response = await axios.post(
-      "", 
-      credentialsadmin);
+    const response = await axios.post("", credentialsadmin);
   };
   const handleSubmission = async (e) => {
     e.preventDefault();
@@ -84,7 +89,7 @@ export default function Login() {
               aria-describedby="emailHelp"
               placeholder=" Email Id"
               name="email"
-              value={!admin?credentials.email:credentialsadmin.email}
+              value={!admin ? credentials.email : credentialsadmin.email}
               onChange={onChange}
             />
           </div>
@@ -95,7 +100,7 @@ export default function Login() {
               id="exampleInputPassword1"
               placeholder=" Password"
               name="password"
-              value={!admin?credentials.password:credentialsadmin.password}
+              value={!admin ? credentials.password : credentialsadmin.password}
               onChange={onChange}
             />
           </div>
@@ -114,7 +119,7 @@ export default function Login() {
           ) : (
             ""
           )}
-
+          <div className="container" style={{color:"red"}}>{loginError}</div>
           <button type="submit" className="btn  m-3">
             Login
           </button>
