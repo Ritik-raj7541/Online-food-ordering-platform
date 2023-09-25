@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler') ;
-const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
 const bcrypt = require('bcrypt') ;
+const jwt = require('jsonwebtoken') ;
+const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
 //post method for registering user
 
 //1. Post
@@ -38,13 +39,30 @@ const postRegister = asyncHandler (async (req, res) =>{
       // res.status(200).json(newAdmin) ;
 }) ;
 
-//post method to login user
+//Post method to login user
+//2. api/admin/login
+
 const postLogin = asyncHandler (async(req, res) =>{
       const {email, password} = req.body ;
       if(!email || !password){
             res.status(400) ;
             throw new Error("All fields are mandatory!") ;
       }
+      const admin = await Admin.findOne({email}) ;
+      if(admin && (await bcrypt.compare(password, admin.password))){
+            const accessToken = jwt.sign({
+                  admin: {
+                        id: admin.id,
+                  }
+            },
+            process.env.SECERET_ACCESS_TOKEN,
+            {expiresIn:"1m"}
+            ) ;
+            res.status(200).json({accessToken}) ;
+      }else{
+            res.status(401) ;
+            throw new Error("Not a valid Admin") ;
+      }
 }) ;
 
-module.exports = {postRegister} ;
+module.exports = {postRegister, postLogin} ;

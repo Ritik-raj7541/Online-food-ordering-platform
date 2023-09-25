@@ -1,15 +1,17 @@
 const asyncHandler = require('express-async-handler') ;
 const foodItem = require('../../models/foods/foodItems') ;
 const foodCategory = require('../../models/foods/foodCategory') ;
-
+const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
 //1.
 //GET - api/admin/get-all-items
 const getFoodItems = asyncHandler(async(req, res) =>{
-      const allFood = await foodItem.find({}) ;
-      res.status(200).json(allFood) ;
+      const adminId = req.params.id ;
+      const admin = await Admin.findById(adminId) ;
+      res.status(200).json(admin.foodItems) ;
 }) ;
 //2.
 //GET - api/admin/get-all-category
+// STOPPED
 const getCategory = asyncHandler(async(req, res) =>{
       const allCategory = await foodCategory.find() ;
       res.status(200).json(allCategory) ;
@@ -17,11 +19,14 @@ const getCategory = asyncHandler(async(req, res) =>{
 //3.
 //POST - api/admin/add-items
 const postItems = asyncHandler(async(req, res) => {
+      //take value in object from frontend
       const {CategoryName, name, img, options, description} = req.body ;
+
       if(!CategoryName || !name || !img || !options || !description){
             res.status(400) ;
             throw new Error("All fields are mandatory!!") ;
       }
+
       const category = await foodCategory.findOne({CategoryName}) ;
       if(!category){
             console.log('creating new cat');
@@ -29,14 +34,25 @@ const postItems = asyncHandler(async(req, res) => {
                   foodCategory: CategoryName,
             }) ;
       }
-      const newItem = await foodItem.create({
+      const newItem = {
             CategoryName,
             name,
             img,
             options,
             description,
-      }) ;
-      res.status(200).json(newItem) ;
+      } ;
+      const adminId = req.params.id ;
+      const updatedAdmin = await Admin.findOneAndUpdate(
+            {_id: adminId},
+            {$push: {foodItems: newItem}},
+            {new: true} ,
+      ) ;
+      if(updatedAdmin){
+            res.status(200).json(newItem) ;
+      }else{
+            res.status(400) ;
+            throw new Error("Not able to update") ;
+      }
 }) ;
 
 //4.
@@ -66,6 +82,5 @@ const updateItem = asyncHandler(async(req, res)=>{const itemId = req.params.id ;
 module.exports = {postItems, 
                   deleteItems, 
                   getFoodItems, 
-                  getCategory, 
                   updateItem
             } ;
