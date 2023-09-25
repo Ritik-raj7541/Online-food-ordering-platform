@@ -1,9 +1,14 @@
 const mongoose = require('mongoose') ;
 const orderSchema = mongoose.Schema({
-      email : {
+      userEmail : {
             type: String,
             required: true,
             unique: true,
+      },
+      providerEmail : {
+            type: String,
+            require: true,
+            uniqu: true,
       },
       orderData : {
             type: Array,
