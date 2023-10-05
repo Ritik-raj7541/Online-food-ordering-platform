@@ -56,16 +56,20 @@ const postItems = asyncHandler(async(req, res) => {
 }) ;
 
 //4.
-//DELETE - api/admin/delete-items/:id
+//DELETE - api/admin/delete-items/:id/:itemId
 const deleteItems = asyncHandler(async(req, res)=>{
-      const itemId = req.params.id ;
-      const deletedItem = await foodItem.deleteOne({_id:itemId}) ;
+      const adminId = req.params.id ;
+      const itemId = req.params.itemId ;
+      const deletedItem = await Admin.findOneAndUpdate(
+            {_id:adminId},
+            { $pull: {foodItems: {_id: itemId}}},
+            {new: true},
+            ) ;
       if(!deletedItem){
             res.status(400) ;
             throw new Error('item not found') ;
       }
       res.status(200).json(deletedItem) ;
-
 }) ;
 
 //5.

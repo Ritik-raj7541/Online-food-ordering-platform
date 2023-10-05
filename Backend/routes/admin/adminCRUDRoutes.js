@@ -4,6 +4,6 @@ const { postItems, deleteItems, getFoodItems, updateItem } = require('../../cont
 
 routes.route('/get-all-items/:id').get(getFoodItems) ;
 routes.route('/add-items/:id').post(postItems) ;
-routes.route('/delete-items/:id').delete(deleteItems) ;
+routes.route('/delete-items/:id/:itemId').put(deleteItems) ;
 routes.route('/update-items/:id').put(updateItem) ;
 module.exports = routes ;
