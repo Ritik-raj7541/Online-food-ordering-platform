@@ -3,21 +3,31 @@ const foodItems = require("../../models/foods/foodItems");
 const foodCategorys = require("../../models/foods/foodCategory");
 const Orders = require("../../models/orders");
 const User = require("../../models/customer");
+const RestaurantClients = require("../../models/CraveMatePartners/RestaurantClients");
+
+//0.
+//GET - api/customer/get-restaurants
+const getRestaurant = asyncHandler(async (req, res) =>{
+   const restaurants = await RestaurantClients.find() ;
+   res.status(200).json(restaurants) ;
+}) ;
 //1.
-//GET - api/customer/get-item
+//POST - api/customer/get-item
 const getMenu = asyncHandler(async (req, res) => {
   const foodCat = await foodCategorys.find();
   let foodUnderCat = {};
+  const {restaurantId} = req.body ;
+  const restaurant = await RestaurantClients.findById(restaurantId) ;
 
   for (let index = 0; index < foodCat.length; index++) {
     const element = foodCat[index];
     const CategoryOfFood = element.CategoryName;
-    const foodItem = await foodItems.find({ CategoryName: CategoryOfFood });
+    const foodItem = await restaurant.foodItems.filter(item => item.CategoryName === CategoryOfFood);
+
     foodUnderCat[CategoryOfFood] = foodUnderCat[CategoryOfFood] || [];
     foodUnderCat[CategoryOfFood] = foodItem;
   }
   let finalData = Object.entries(foodUnderCat);
-
   res.status(200).json(finalData);
 });
 
@@ -106,4 +116,4 @@ const search = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getMenu, checkOut, myDetails, search };
+module.exports = { getRestaurant, getMenu, checkOut, myDetails, search };

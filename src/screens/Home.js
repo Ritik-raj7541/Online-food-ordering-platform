@@ -2,8 +2,9 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../helpers.js/Carousel";
-import MidSection from "../components/MidSection";
+// import MidSection from "../components/MidSection";
 import AboutUs from "../components/AboutUs";
+import AllResturantPage from "./AllResturantPage";
 
 export default function Home() {
   return (
@@ -11,8 +12,7 @@ export default function Home() {
       <Navbar />
       <Carousel />
       <div className="container">
-        {/* {console.log("again came")} */}
-        {!localStorage.getItem("authToken") ? ("") : (<MidSection />)}
+        {!localStorage.getItem("authToken") ? ("") : (<AllResturantPage />)}
       </div>
       <hr className="hr my-4"/>
       <AboutUs/>

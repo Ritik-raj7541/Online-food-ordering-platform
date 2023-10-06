@@ -9,6 +9,7 @@ const restaurantSchema = mongoose.Schema({
             type:String,
             required:true,
       },
+      //Customer view
       restaurantName:{
             type:String,
             required:true,
@@ -21,10 +22,15 @@ const restaurantSchema = mongoose.Schema({
             type:String,
             required:true,
       },
+      restaurantDescription: {
+            type: String,
+            required: true,
+      },
       star:{
             type:Number,
             required:true,
       },
+      //secondary customer view
       foodItems:[
             {
                   CategoryName:{

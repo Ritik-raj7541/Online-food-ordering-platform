@@ -32,7 +32,7 @@ export default function Staters() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-caption d-none d-md-block" style={{zIndex:"10"}}>
-            <Search />
+            {/* <Search /> */}
           </div>
           <div className="carousel-item active">
             <img src={a} className="d-block carousel-image" alt="pic_1" />

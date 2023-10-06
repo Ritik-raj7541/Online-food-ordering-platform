@@ -5,22 +5,24 @@ import { CartContext } from "../../components/CartContext";
 import { SearchContext } from "../../components/SearchContext";
 // import aa from "../pictures/carsoule-care.jpg"
 
-export default function Items() {
+export default function Items(props) {
+  const id = props.id ;
   const { searchedFood, Search } = useContext(SearchContext);
   const url = "http://localhost:5000/api/customer/get-item";
   const [foodItems, getfoodItems] = useState([]);
   useEffect(() => {
     getAllFoodItems();
   }, []);
-
+  
   const getAllFoodItems = async (e) => {
-    const fetcher = await axios
-      .get(url)
-      .then((response) => {
-        const foodData = response.data;
-        getfoodItems(foodData);
-      })
-      .catch((error) => console.error(`Error: $(error)`));
+    if(id !== ""){
+      const response = await axios.post(url, {
+        restaurantId: id,
+      }) ;
+        if(response.status === 200){
+          getfoodItems(response.data) ;
+        }
+    }
   };
   const { cart } = useContext(CartContext);
   useEffect(() => {

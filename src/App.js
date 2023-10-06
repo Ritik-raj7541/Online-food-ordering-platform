@@ -7,6 +7,7 @@ import { CartProvider } from "./components/CartContext";
 import MyCart from "./components/MyCart";
 import MyProfile from "./screens/MyProfile";
 import { SearchProvider } from "./components/SearchContext";
+import ResturantPage from "./screens/ResturantPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/myCart" element={<MyCart />} />
               <Route exact path="/myProfile" element={<MyProfile />} />
+              <Route exact path="/restaurant/:id" element={<ResturantPage/>} />
             </Routes>
           </BrowserRouter>
         </CartProvider>

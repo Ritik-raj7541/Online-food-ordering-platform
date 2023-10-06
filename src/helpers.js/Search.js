@@ -16,10 +16,10 @@ export default function Search() {
   }, [text]) ;
   return (
     <div>
-      <div className="input-group rounded">
+      <div className="search-bar my-4">
         <input
           type="search"
-          className="form-control rounded"
+          className="rounded"
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
