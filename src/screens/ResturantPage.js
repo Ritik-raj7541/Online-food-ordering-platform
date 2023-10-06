@@ -12,11 +12,16 @@ export default function () {
     const response = await axios.post(url, { restaurantId: id });
     if (response.status === 200) {
       setrestaurant(response.data);
+      
     }
   };
   useEffect(() => {
     handleRestaurantDetails();
   }, []);
+  useEffect(() => {
+    localStorage.setItem("providerEmail", restaurant.email);
+  }, [restaurant]) ;
+  
   return (
     <div>
       <Navbar />

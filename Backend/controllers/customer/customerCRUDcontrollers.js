@@ -17,7 +17,7 @@ const getRestaurant = asyncHandler(async (req, res) =>{
 const getSpecificRestaurant = asyncHandler(async (req, res) =>{
     const {restaurantId} = req.body ;
     const restaurant = await RestaurantClients.findById(restaurantId) ;
-    console.log(restaurant);
+    // console.log(restaurant);
     res.status(200).json(restaurant) ;
 }) ;
 //2.
@@ -44,14 +44,23 @@ const getMenu = asyncHandler(async (req, res) => {
 //POST - api/customer/check-out
 
 const checkOut = asyncHandler(async (req, res) => {
-  const { email, cart } = req.body;
+  const { email, providerEmail, cart } = req.body;
   //find if the user exist
-  const user = await Orders.findOne({ email });
+  const user = await Orders.findOne({ userEmail: email });
   if (user) {
     //update
+    const filter = {
+      userEmail: email,
+      providerEmail: providerEmail
+    } ;
+    const update = { $push: { orderData: cart } } ;
     const updatedOrder = await Orders.findOneAndUpdate(
-      { email: user.email },
-      { $push: { orderData: cart } }
+      filter,
+      update,
+      {
+        new: true,
+        useFindAndModify: false,
+      }
     );
     if (updatedOrder) {
       res.status(200).json({ message: "order updated" });
@@ -62,7 +71,8 @@ const checkOut = asyncHandler(async (req, res) => {
   } else {
     //create
     const newOrder = await Orders.create({
-      email: email,
+      userEmail: email,
+      providerEmail: providerEmail,
       orderData: [cart],
     });
     if (newOrder) {
@@ -80,9 +90,8 @@ const myDetails = asyncHandler(async (req, res) => {
   const { email } = req.body;
   // console.log("email -> ",email);
   const user = await User.findOne({ email });
-  const orders = await Orders.findOne({ email });
-  // console.log(orders.orderData);
-  // let orderHistory = [];
+  const orders = await Orders.findOne({ userEmail: email });
+
   let userCompleteDetails = {
     name: user.name,
     address: "",

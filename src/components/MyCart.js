@@ -23,9 +23,11 @@ export default function MyCart() {
   };
   const handleCheckOut = async () => {
       const email = localStorage.getItem("userEmail") ;
+      const providerEmail = localStorage.getItem("providerEmail") ;
       // console.log(userEmail);
       const dataForCheckOut = {
         email,
+        providerEmail,
         cart
       } ;
       const response = await axios.post(
