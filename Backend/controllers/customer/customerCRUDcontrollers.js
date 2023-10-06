@@ -11,7 +11,16 @@ const getRestaurant = asyncHandler(async (req, res) =>{
    const restaurants = await RestaurantClients.find() ;
    res.status(200).json(restaurants) ;
 }) ;
+
 //1.
+//POST -api/customer/get-specific-restaurants
+const getSpecificRestaurant = asyncHandler(async (req, res) =>{
+    const {restaurantId} = req.body ;
+    const restaurant = await RestaurantClients.findById(restaurantId) ;
+    console.log(restaurant);
+    res.status(200).json(restaurant) ;
+}) ;
+//2.
 //POST - api/customer/get-item
 const getMenu = asyncHandler(async (req, res) => {
   const foodCat = await foodCategorys.find();
@@ -31,7 +40,7 @@ const getMenu = asyncHandler(async (req, res) => {
   res.status(200).json(finalData);
 });
 
-//2.
+//3.
 //POST - api/customer/check-out
 
 const checkOut = asyncHandler(async (req, res) => {
@@ -65,7 +74,7 @@ const checkOut = asyncHandler(async (req, res) => {
   }
 });
 
-// 3. to get user profile .
+// 4. to get user profile .
 //GET - api/customer/get-my-details
 const myDetails = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -93,7 +102,7 @@ const myDetails = asyncHandler(async (req, res) => {
   }
 });
 
-//4. for searching food
+//5. for searching food
 //POST - api/customer/search
 const search = asyncHandler(async (req, res) => {
   const {query}  = req.body;
@@ -116,4 +125,4 @@ const search = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getRestaurant, getMenu, checkOut, myDetails, search };
+module.exports = { getSpecificRestaurant, getRestaurant, getMenu, checkOut, myDetails, search };
