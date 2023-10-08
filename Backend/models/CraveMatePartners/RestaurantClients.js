@@ -16,19 +16,15 @@ const restaurantSchema = mongoose.Schema({
       },
       restaurantImg: {
             type:String,
-            required:true,
       },
       location:{
             type:String,
-            required:true,
       },
       restaurantDescription: {
             type: String,
-            required: true,
       },
       star:{
             type:Number,
-            required:true,
       },
       //secondary customer view
       foodItems:[

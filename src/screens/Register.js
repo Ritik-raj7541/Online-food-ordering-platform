@@ -23,7 +23,7 @@ export default function Register() {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/admin/register",
-        credentials
+        credentialsadmin
       );
       if (response.status === 200) {
         console.log("status done");
@@ -35,7 +35,7 @@ export default function Register() {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setloginError(
-          "*User with same email id already exist please try different email id"
+          "*User with same email id already exist or admin key not exist try again"
         );
       }
     }
@@ -142,8 +142,8 @@ export default function Register() {
                   className="input"
                   id="exampleInputadminkey1"
                   placeholder=" Admin Key"
-                  name="adminkey"
-                  value={credentialsadmin.adminkey}
+                  name="adminKey"
+                  value={credentialsadmin.adminKey}
                   onChange={onChange}
                 />
               </div>

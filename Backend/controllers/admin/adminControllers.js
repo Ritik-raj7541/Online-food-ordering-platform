@@ -2,31 +2,33 @@ const asyncHandler = require('express-async-handler') ;
 const bcrypt = require('bcrypt') ;
 const jwt = require('jsonwebtoken') ;
 const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
+const clients = require('../../models/clients');
 //post method for registering user
 
 //1. Post
 // api/admin/register
 const postRegister = asyncHandler (async (req, res) =>{
-      const {restaurantName, email, password, } = req.body ;
-      if(!restaurantName || !email || !password ||  !location){
+      const {restaurantName, email, password, adminKey} = req.body ;
+      if(!restaurantName || !email || !password ||  !adminKey){
             res.status(400) ;
             throw new Error("All fields are mandatory!!") ;
       }
       const resturant = await Admin.findOne({email}) ;
-      // console.log(resturant);
       if(resturant){
             res.status(400) ;
             throw new Error("Resturant already exist!!") ;
       }
+      const admin = clients.findOne({adminKey}) ;
+      if(!admin){
+            res.status(400) ;
+            throw new Error("No such admin key exist !!") ;
+      }
       const hashPassword = await bcrypt.hash(password, 10) ;
       const newAdmin = await Admin.create({
+            restaurantName,
             email,
             password: hashPassword,
-            restaurantName,
-            restaurantImg,
-            location,
-            star,
-            foodItems,
+            adminKey:adminKey,
       }) ;
       if(newAdmin){
             res.status(200).json({ _id:newAdmin.id, email: newAdmin.email}) ;

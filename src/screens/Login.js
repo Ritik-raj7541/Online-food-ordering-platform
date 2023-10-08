@@ -36,7 +36,22 @@ export default function Login() {
     }
   };
   const handleSubmissionForAdmin = async () => {
-    const response = await axios.post("", credentialsadmin);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/login",
+        credentialsadmin
+      );
+      if (response.status === 200) {
+        localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("userEmail", credentials.email);
+        setloginError("");
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setloginError("*enter the valid credentials");
+      }
+    }
   };
   const handleSubmission = async (e) => {
     e.preventDefault();

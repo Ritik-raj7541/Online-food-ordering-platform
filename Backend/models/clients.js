@@ -6,4 +6,4 @@ const clientSchema = mongoose.Schema({
       }
 }) ;
 
-module.exports = mongoose.model("Client", customerSchema) ;
+module.exports = mongoose.model("Client", clientSchema) ;
