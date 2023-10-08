@@ -13,34 +13,9 @@ export default function Login() {
   const [credentialsadmin, setcredentialsadmin] = useState({
     email: "",
     password: "",
-    adminkey: "",
   });
-  const [admin, setAdmin] = useState(false); //telling if user is admin or not
+  const [admin, setAdmin] = useState(false);
   const [loginError, setloginError] = useState("");
-  const handleAdminToggle = (e) => {
-    // console.log(e.target.value);
-    setAdmin(!admin);
-    setcredentialsadmin({
-      email: "",
-      password: "",
-      adminkey: "",
-    });
-  };
-  // useEffect(() => {
-  //   console.log(credentialsadmin);
-  // }, [credentialsadmin]) ;
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    // console.log(admin);
-    if (admin === false) {
-      setcredentials({ ...credentials, [name]: value }); // Uwpdate credentials
-      // console.log(credentials.email);
-    } else {
-      setcredentialsadmin({ ...credentialsadmin, [name]: value }); // Update credentialsadmin
-      // console.log(credentialsadmin.email);
-    }
-  };
 
   const handleSubmissionForCustomer = async () => {
     try {
@@ -61,7 +36,6 @@ export default function Login() {
     }
   };
   const handleSubmissionForAdmin = async () => {
-    // console.log("admin");
     const response = await axios.post("", credentialsadmin);
   };
   const handleSubmission = async (e) => {
@@ -70,6 +44,23 @@ export default function Login() {
       handleSubmissionForAdmin();
     } else {
       handleSubmissionForCustomer();
+    }
+  };
+
+  const handleAdminToggle = (e) => {
+    setAdmin(!admin);
+    setcredentialsadmin({
+      email: "",
+      password: "",
+    });
+  };
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (admin === false) {
+      setcredentials({ ...credentials, [name]: value });
+    } else {
+      setcredentialsadmin({ ...credentialsadmin, [name]: value });
     }
   };
 
@@ -104,22 +95,9 @@ export default function Login() {
               onChange={onChange}
             />
           </div>
-          {admin === true ? (
-            <div className="form-group my-3">
-              <input
-                type="text"
-                className="input"
-                id="exampleInputadminkey1"
-                placeholder=" Admin Key"
-                name="adminkey"
-                value={credentialsadmin.adminkey}
-                onChange={onChange}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-          <div className="container" style={{color:"red"}}>{loginError}</div>
+          <div className="container" style={{ color: "red" }}>
+            {loginError}
+          </div>
           <button type="submit" className="btn  m-3">
             Login
           </button>

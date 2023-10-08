@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import a from "../pictures/delivery-boy.png"
+import a from "../pictures/delivery-boy.png";
 import axios from "axios";
-
 
 export default function Register() {
   let navigate = useNavigate();
@@ -11,56 +10,106 @@ export default function Register() {
     email: "",
     password: "",
   });
-  const [loginError, setloginError] = useState("")
-  const handleSubmission = async (e) => {
-    e.preventDefault();
+  const [credentialsadmin, setcredentialsadmin] = useState({
+    restaurantName: "",
+    email: "",
+    password: "",
+  });
+  const [admin, setAdmin] = useState(false);
+  const [loginError, setloginError] = useState("");
+
+  const handleSubmissionForAdmin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/register",
+        credentials
+      );
+      if (response.status === 200) {
+        console.log("status done");
+        localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("adminEmail", credentials.email);
+        setloginError("");
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setloginError(
+          "*User with same email id already exist please try different email id"
+        );
+      }
+    }
+  };
+  const handleSubmissionForCustomer = async () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/customer/register",
         credentials
       );
-      // console.log(response.status);
       if (response.status === 200) {
         console.log("status done");
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("userEmail", credentials.email);
-        setloginError("") ;
+        setloginError("");
         navigate("/");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setloginError("*User with same email id already exist please try different email id");
+        setloginError(
+          "*User with same email id already exist please try different email id"
+        );
       }
     }
-    
+  };
+  const handleSubmission = async (e) => {
+    e.preventDefault();
+    if (admin) {
+      handleSubmissionForAdmin();
+    } else {
+      handleSubmissionForCustomer();
+    }
   };
   const onChange = (e) => {
     const { name, value } = e.target;
-    setcredentials({ ...credentials, [name]: value });
+    if (admin === false) {
+      setcredentials({ ...credentials, [name]: value });
+    } else {
+      console.log(name);
+      setcredentialsadmin({ ...credentialsadmin, [name]: value });
+    }
   };
+
+  const handleAdminToggle = (e) => {
+    setAdmin(!admin);
+    setcredentialsadmin({
+      restaurantName: "",
+      email: "",
+      password: "",
+    });
+  };
+
   return (
     <>
       <div className="container entry-container">
         <div className="container logo-container">
-        <img src={a} alt="" className="login-image"/>
+          <img src={a} alt="" className="login-image" />
         </div>
         <div className="container login-container">
           <form onSubmit={handleSubmission}>
             <div className="form-group my-3">
-              {/* <label htmlFor="exampleInputEmail1">Name</label> */}
               <input
                 type="text"
                 className="input"
                 id="exampleInputName1"
-                aria-describedby="emailHelp"
-                placeholder="Enter name"
-                name="name"
-                value={credentials.name}
+                aria-describedby="nameHelp"
+                placeholder={!admin ? "Name" : "Restaurant Name"}
+                name={!admin ? "name" : "restaurantName"}
+                value={
+                  !admin ? credentials.name : credentialsadmin.restaurantName
+                }
                 onChange={onChange}
               />
             </div>
             <div className="form-group my-3">
-              {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
               <input
                 type="email"
                 className="input"
@@ -68,23 +117,41 @@ export default function Register() {
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 name="email"
-                value={credentials.email}
+                value={!admin ? credentials.email : credentialsadmin.email}
                 onChange={onChange}
               />
             </div>
             <div className="form-group my-3">
-              {/* <label htmlFor="exampleInputPassword1">Password</label> */}
               <input
                 type="password"
                 className="input"
                 id="exampleInputPassword1"
                 placeholder="Password"
                 name="password"
-                value={credentials.password}
+                value={
+                  !admin ? credentials.password : credentialsadmin.password
+                }
                 onChange={onChange}
               />
             </div>
-            <div className="container" style={{color:"red"}}>{loginError}</div>
+            {admin === true ? (
+              <div className="form-group my-3">
+                <input
+                  type="text"
+                  className="input"
+                  id="exampleInputadminkey1"
+                  placeholder=" Admin Key"
+                  name="adminkey"
+                  value={credentialsadmin.adminkey}
+                  onChange={onChange}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            <div className="container" style={{ color: "red" }}>
+              {loginError}
+            </div>
             <button type="submit" className="btn my-3">
               Submit
             </button>
@@ -93,6 +160,23 @@ export default function Register() {
               Already have an account{" "}
             </Link>
           </form>
+        </div>
+        <div className="container admin-container my-4">
+          <div className="form-check form-switch ">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              onChange={handleAdminToggle}
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Admin
+            </label>
+          </div>
         </div>
       </div>
     </>
