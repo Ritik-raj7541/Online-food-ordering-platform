@@ -7,7 +7,7 @@ const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
 //1. Post
 // api/admin/register
 const postRegister = asyncHandler (async (req, res) =>{
-      const {email, password, restaurantName, restaurantImg, location, star, foodItems} = req.body ;
+      const {restaurantName, email, password, } = req.body ;
       if(!restaurantName || !email || !password ||  !location){
             res.status(400) ;
             throw new Error("All fields are mandatory!!") ;
@@ -35,8 +35,6 @@ const postRegister = asyncHandler (async (req, res) =>{
             throw new Error("User data not valid") ;
       }
 
-
-      // res.status(200).json(newAdmin) ;
 }) ;
 
 //Post method to login user

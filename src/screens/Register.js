@@ -14,6 +14,7 @@ export default function Register() {
     restaurantName: "",
     email: "",
     password: "",
+    adminKey: "",
   });
   const [admin, setAdmin] = useState(false);
   const [loginError, setloginError] = useState("");
@@ -73,7 +74,6 @@ export default function Register() {
     if (admin === false) {
       setcredentials({ ...credentials, [name]: value });
     } else {
-      console.log(name);
       setcredentialsadmin({ ...credentialsadmin, [name]: value });
     }
   };
@@ -84,6 +84,7 @@ export default function Register() {
       restaurantName: "",
       email: "",
       password: "",
+      adminKey:""
     });
   };
 
