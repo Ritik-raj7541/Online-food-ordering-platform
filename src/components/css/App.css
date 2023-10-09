@@ -211,3 +211,18 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* admin */
+.admin-heading{
+  align-items: center;
+  margin: auto;
+  width: 50%;
+  /* border: 2px solid black; */
+  text-align: center;
+  padding: 10px;
+}
+.admin-img{
+  height: 250px;
+  width: 250px;
+  border-radius: 8px;
+}

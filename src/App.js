@@ -8,6 +8,7 @@ import MyCart from "./components/MyCart";
 import MyProfile from "./screens/MyProfile";
 import { SearchProvider } from "./components/SearchContext";
 import ResturantPage from "./screens/ResturantPage";
+import LandingAdmin from "./screens/LandingAdmin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route exact path="/myCart" element={<MyCart />} />
               <Route exact path="/myProfile" element={<MyProfile />} />
               <Route exact path="/restaurant/:id" element={<ResturantPage/>} />
+              <Route exact path="/landingPageAdmin/:id" element = {<LandingAdmin/>} />
             </Routes>
           </BrowserRouter>
         </CartProvider>

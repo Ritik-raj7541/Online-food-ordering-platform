@@ -17,7 +17,6 @@ const getRestaurant = asyncHandler(async (req, res) =>{
 const getSpecificRestaurant = asyncHandler(async (req, res) =>{
     const {restaurantId} = req.body ;
     const restaurant = await RestaurantClients.findById(restaurantId) ;
-    // console.log(restaurant);
     res.status(200).json(restaurant) ;
 }) ;
 //2.

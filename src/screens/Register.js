@@ -26,11 +26,11 @@ export default function Register() {
         credentialsadmin
       );
       if (response.status === 200) {
-        console.log("status done");
-        localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("authTokenAdmin", response.data.accessToken);
         localStorage.setItem("adminEmail", credentials.email);
         setloginError("");
-        navigate("/");
+        const restUrl = "/landingPageAdmin/"+ response.data.response.id;
+        navigate(restUrl);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {

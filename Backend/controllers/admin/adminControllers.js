@@ -58,7 +58,11 @@ const postLogin = asyncHandler (async(req, res) =>{
             process.env.SECERET_ACCESS_TOKEN,
             {expiresIn:"1m"}
             ) ;
-            res.status(200).json({accessToken}) ;
+            const response = {
+                  id: admin.id,
+                  accessToken,
+            }
+            res.status(200).json({response}) ;
       }else{
             res.status(401) ;
             throw new Error("Not a valid Admin") ;

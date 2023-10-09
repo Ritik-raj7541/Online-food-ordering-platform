@@ -42,10 +42,11 @@ export default function Login() {
         credentialsadmin
       );
       if (response.status === 200) {
-        localStorage.setItem("authToken", response.data.accessToken);
-        localStorage.setItem("userEmail", credentials.email);
+        localStorage.setItem("authTokenAdmin", response.data.accessToken);
+        localStorage.setItem("adminEmail", credentials.email);
         setloginError("");
-        navigate("/");
+        const restUrl = "/landingPageAdmin/"+ response.data.response.id ;
+        navigate(restUrl);
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
