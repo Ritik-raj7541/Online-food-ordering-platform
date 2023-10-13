@@ -13,18 +13,18 @@ const getRestaurant = asyncHandler(async (req, res) =>{
 }) ;
 
 //1.
-//POST -api/customer/get-specific-restaurants
+//GET -api/customer/get-specific-restaurants
 const getSpecificRestaurant = asyncHandler(async (req, res) =>{
-    const {restaurantId} = req.body ;
+    const restaurantId = req.params.id ;
     const restaurant = await RestaurantClients.findById(restaurantId) ;
     res.status(200).json(restaurant) ;
 }) ;
 //2.
-//POST - api/customer/get-item
+//GET - api/customer/get-item
 const getMenu = asyncHandler(async (req, res) => {
   const foodCat = await foodCategorys.find();
   let foodUnderCat = {};
-  const {restaurantId} = req.body ;
+  const restaurantId = req.params.id ;
   const restaurant = await RestaurantClients.findById(restaurantId) ;
 
   for (let index = 0; index < foodCat.length; index++) {
@@ -86,7 +86,7 @@ const checkOut = asyncHandler(async (req, res) => {
 // 4. to get user profile .
 //GET - api/customer/get-my-details
 const myDetails = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const email = req.params.email;
   // console.log("email -> ",email);
   const user = await User.findOne({ email });
   const orders = await Orders.findOne({ userEmail: email });

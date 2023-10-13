@@ -8,7 +8,7 @@ import { SearchContext } from "../../components/SearchContext";
 export default function Items(props) {
   const id = props.id ;
   const { searchedFood, Search } = useContext(SearchContext);
-  const url = "http://localhost:5000/api/customer/get-item";
+  const url = "http://localhost:5000/api/customer/get-item/"+id;
   const [foodItems, getfoodItems] = useState([]);
   useEffect(() => {
     getAllFoodItems();
@@ -16,9 +16,7 @@ export default function Items(props) {
   
   const getAllFoodItems = async (e) => {
     if(id !== ""){
-      const response = await axios.post(url, {
-        restaurantId: id,
-      }) ;
+      const response = await axios.get(url) ;
         if(response.status === 200){
           getfoodItems(response.data) ;
         }

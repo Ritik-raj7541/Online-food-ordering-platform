@@ -6,21 +6,17 @@ import axios from "axios";
 export default function MyProfile() {
   const [user, setuser] = useState(null);
   const email = localStorage.getItem("userEmail");
-  const dataForDetails = {
-    email,
-  };
+
   const capital = (text) => {
     let a = text[0].toUpperCase() + text.slice(1);
     return a;
   };
   const fetchUserData = async () => {
-    const response = await axios.post(
-      "http://localhost:5000/api/customer/get-my-details",
-      dataForDetails
+    const response = await axios.get(
+      "http://localhost:5000/api/customer/get-my-details/"+email,
     );
     if (response.status === 200) {
       setuser(response.data);
-      // console.log(user);
     }
   };
   useEffect(() => {
@@ -28,8 +24,7 @@ export default function MyProfile() {
   }, []);
 
   useEffect(() => {
-    // fetchUserData();
-    if (user !== null) console.log(user.orderHistory);
+    // if (user !== null) console.log(user.orderHistory);
   }, [user]);
 
   return (

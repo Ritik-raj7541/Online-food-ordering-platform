@@ -7,12 +7,13 @@ import axios from "axios";
 export default function () {
   const { id } = useParams();
   const [restaurant, setrestaurant] = useState({});
-  const url = "http://localhost:5000/api/customer/get-specific-restaurants";
+  const url = "http://localhost:5000/api/customer/get-specific-restaurants/"+id;
+  // console.log(url);
   const handleRestaurantDetails = async () => {
-    const response = await axios.post(url, { restaurantId: id });
+    const response = await axios.get(url);
+    // console.log(response);
     if (response.status === 200) {
       setrestaurant(response.data);
-      
     }
   };
   useEffect(() => {
