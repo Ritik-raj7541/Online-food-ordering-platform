@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import AdminNavbar from '../components/AdminNavbar';
 
 export default function LandingAdmin() {
       const {id} = useParams() ;
       const [restaurant, setrestaurant] = useState({}) ;
       
       const fetchRestaurantDetails = async() =>{
-            const url = "http://localhost:5000/api/customer/get-specific-restaurants"
-            const response = await axios.post(url, { restaurantId: id }) ;
+            const url = "http://localhost:5000/api/customer/get-specific-restaurants/"+id ;
+            const response = await axios.get(url) ;
             if(response.status === 200){
                   setrestaurant(response.data) ;
             }
@@ -35,7 +36,9 @@ export default function LandingAdmin() {
             }
       }
   return (
+
     <div className="container my-2">
+      <AdminNavbar/>
       <div className="container my-3 admin-heading">
             <img className="admin-img" src={restaurant.restaurantImg} alt="" />
             
