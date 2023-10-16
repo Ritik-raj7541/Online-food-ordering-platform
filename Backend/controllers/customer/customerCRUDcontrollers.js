@@ -90,8 +90,6 @@ const checkOut = asyncHandler(async (req, res) => {
       throw new Error("not able to update order");
     }
   } else {
-    //create
-    console.log(customerEmail, providerEmail);
     const newOrder = await Orders.create({
       userEmail: customerEmail,
       providerEmail: providerEmail,

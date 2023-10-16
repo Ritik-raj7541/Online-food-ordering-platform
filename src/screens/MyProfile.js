@@ -55,7 +55,9 @@ export default function MyProfile() {
           ? user.orderHistory.map((order) => (
 
               <div className="container packet my-3">
-                {order.map((items) => (
+                <h4>Date : </h4>
+                <h4>Status : <span style={{color:"red"}}>{order.status}</span></h4> 
+                {order.cart.map((items) => (
                   <div className="container  row">
                     <div className="items col-2 my-2" key={1}>
                       <img src={items.img} alt="" className="history-image" />
@@ -69,13 +71,10 @@ export default function MyProfile() {
                     <div className="items col-1" key={1}>
                       ₹ {items.price} /-
                     </div>
-                    <div className="items col-1" key={1}>
-                      status
-                    </div>
                   </div>
                 ))}
               </div>
-            ))
+            )).reverse()
           : "No order History"}
       </div>
     </>
