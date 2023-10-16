@@ -29,7 +29,7 @@ export const SearchProvider = ({children}) => {
             }
       } ;
       useEffect(() => {
-            if(query !== ""){
+            if(id !== ""){
                   FetchSearchedData() ;
             }
       }, [query])
