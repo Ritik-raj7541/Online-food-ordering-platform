@@ -6,16 +6,20 @@ export const SearchContext = createContext() ;
 
 export const SearchProvider = ({children}) => {
       const [query, setQuery] = useState("") ;
+      const [id, setid] = useState("") ;
       const [searchedFood, setsearchedFood] = useState("") ;
       const Search = (value) => {
             setQuery(value.text) ;
+            setid(value.id) ;
       }
       const FetchSearchedData = async() =>{
             const findingData = {
-                  query
+                  query,
             } ;
+            const url = "http://localhost:5000/api/customer/search/" + id ;
+
             const response = await axios.post(
-                  "http://localhost:5000/api/customer/search",
+                  url,
                   findingData,
             ) ;
             if(response.status === 200){
@@ -25,7 +29,9 @@ export const SearchProvider = ({children}) => {
             }
       } ;
       useEffect(() => {
-            FetchSearchedData() ;
+            if(query !== ""){
+                  FetchSearchedData() ;
+            }
       }, [query])
       //function
       return(

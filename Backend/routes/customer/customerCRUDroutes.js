@@ -8,6 +8,6 @@ router.route('/get-specific-restaurants/:id').get(getSpecificRestaurant) ;
 router.route('/get-item/:id', validateToken).get(getMenu) ;
 router.route('/get-my-details/:email', validateToken).get(myDetails) ;
 router.route('/check-out', validateToken).post(checkOut) ;
-router.route('/search', validateToken).post(search) ;
+router.route('/search/:id', validateToken).post(search) ;
 
 module.exports = router ;

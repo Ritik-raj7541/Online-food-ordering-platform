@@ -29,7 +29,7 @@ export default function () {
       <div className="container location-star">
         <span className="my-4" style={{fontSize:"35px"}}>{restaurant.restaurantName}</span>
         <span>
-          <Search />
+          <Search id={id}/>
         </span>
       </div>
       <div className="container">

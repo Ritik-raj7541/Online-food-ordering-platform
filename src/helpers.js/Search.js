@@ -1,7 +1,8 @@
 import React, {useState, useContext, useEffect} from "react";
 import { SearchContext } from "../components/SearchContext";
 
-export default function Search() {
+export default function Search(props) {
+  const id = props.id ;
   const [text, setText] = useState("") ;
   const {value, Search} = useContext(SearchContext) ;
   const handleChange = async(event) =>{
@@ -10,7 +11,7 @@ export default function Search() {
   }
   useEffect(() => {
     const SearchFromContext = async() =>{
-      await Search({text}) ;
+      await Search({text, id}) ;
     }
     SearchFromContext() ;
   }, [text]) ;

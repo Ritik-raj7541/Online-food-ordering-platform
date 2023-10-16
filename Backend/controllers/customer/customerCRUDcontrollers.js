@@ -7,30 +7,32 @@ const RestaurantClients = require("../../models/CraveMatePartners/RestaurantClie
 
 //0.
 //GET - api/customer/get-restaurants
-const getRestaurant = asyncHandler(async (req, res) =>{
-   const restaurants = await RestaurantClients.find() ;
-   res.status(200).json(restaurants) ;
-}) ;
+const getRestaurant = asyncHandler(async (req, res) => {
+  const restaurants = await RestaurantClients.find();
+  res.status(200).json(restaurants);
+});
 
 //1.
 //GET -api/customer/get-specific-restaurants
-const getSpecificRestaurant = asyncHandler(async (req, res) =>{
-    const restaurantId = req.params.id ;
-    const restaurant = await RestaurantClients.findById(restaurantId) ;
-    res.status(200).json(restaurant) ;
-}) ;
+const getSpecificRestaurant = asyncHandler(async (req, res) => {
+  const restaurantId = req.params.id;
+  const restaurant = await RestaurantClients.findById(restaurantId);
+  res.status(200).json(restaurant);
+});
 //2.
 //GET - api/customer/get-item
 const getMenu = asyncHandler(async (req, res) => {
   const foodCat = await foodCategorys.find();
   let foodUnderCat = {};
-  const restaurantId = req.params.id ;
-  const restaurant = await RestaurantClients.findById(restaurantId) ;
+  const restaurantId = req.params.id;
+  const restaurant = await RestaurantClients.findById(restaurantId);
 
   for (let index = 0; index < foodCat.length; index++) {
     const element = foodCat[index];
     const CategoryOfFood = element.CategoryName;
-    const foodItem = await restaurant.foodItems.filter(item => item.CategoryName === CategoryOfFood);
+    const foodItem = await restaurant.foodItems.filter(
+      (item) => item.CategoryName === CategoryOfFood
+    );
 
     foodUnderCat[CategoryOfFood] = foodUnderCat[CategoryOfFood] || [];
     foodUnderCat[CategoryOfFood] = foodItem;
@@ -44,23 +46,34 @@ const getMenu = asyncHandler(async (req, res) => {
 
 const checkOut = asyncHandler(async (req, res) => {
   const { email, providerEmail, cart } = req.body;
-  //find if the user exist
   const user = await Orders.findOne({ userEmail: email });
-  if (user) {
-    //update
+  const provider = await RestaurantClients.findOne({ email: providerEmail });
+
+  //new order of restaurant
+  const newOrderForAdmin = await provider.orders.create({
+    userEmail: email,
+    providerEmail: providerEmail,
+    orderData: [cart],
+  });
+
+  if (!newOrderForAdmin) {
+    res.status(400);
+    throw new Error("not able to place order");
+  } else {
+    console.log(newOrderForAdmin);
+  }
+
+  //for user
+  if (user && provider) {
     const filter = {
       userEmail: email,
-      providerEmail: providerEmail
-    } ;
-    const update = { $push: { orderData: cart } } ;
-    const updatedOrder = await Orders.findOneAndUpdate(
-      filter,
-      update,
-      {
-        new: true,
-        useFindAndModify: false,
-      }
-    );
+      providerEmail: providerEmail,
+    };
+    const update = { $push: { orderData: cart } };
+    const updatedOrder = await Orders.findOneAndUpdate(filter, update, {
+      new: true,
+      useFindAndModify: false,
+    });
     if (updatedOrder) {
       res.status(200).json({ message: "order updated" });
     } else {
@@ -113,13 +126,17 @@ const myDetails = asyncHandler(async (req, res) => {
 //5. for searching food
 //POST - api/customer/search
 const search = asyncHandler(async (req, res) => {
-  const {query}  = req.body;
-  if (query.length > 0) {
-    const results = await foodItems.find({
-      $or: [
-        { name: { $regex: new RegExp(query, "i") } },
-        { CategoryName: { $regex: new RegExp(query, "i") } },
-      ],
+  const { query } = req.body;
+  const restaurantId = req.params.id;
+  const restaurant = await RestaurantClients.findById(restaurantId);
+  const foodItems = restaurant.foodItems;
+  if (query.length > 0 && foodItems.length > 0) {
+
+    const results = foodItems.filter((foodItem) => {
+      return (
+        foodItem.name.match(new RegExp(query, "i")) ||
+        foodItem.CategoryName.match(new RegExp(query, "i"))
+      );
     });
     if (results) {
       res.status(200).json(results);
@@ -127,10 +144,17 @@ const search = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("not able to place order");
     }
-  }else{
-      // console.log("not found");
-      res.status(200).json("") ;
+  } else {
+    // console.log("not found");
+    res.status(200).json("");
   }
 });
 
-module.exports = { getSpecificRestaurant, getRestaurant, getMenu, checkOut, myDetails, search };
+module.exports = {
+  getSpecificRestaurant,
+  getRestaurant,
+  getMenu,
+  checkOut,
+  myDetails,
+  search,
+};
