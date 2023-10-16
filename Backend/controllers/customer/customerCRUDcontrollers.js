@@ -45,31 +45,40 @@ const getMenu = asyncHandler(async (req, res) => {
 //POST - api/customer/check-out
 
 const checkOut = asyncHandler(async (req, res) => {
-  const { email, providerEmail, cart } = req.body;
-  const user = await Orders.findOne({ userEmail: email });
-  const provider = await RestaurantClients.findOne({ email: providerEmail });
-
-  //new order of restaurant
-  const newOrderForAdmin = await provider.orders.create({
-    userEmail: email,
-    providerEmail: providerEmail,
-    orderData: [cart],
-  });
-
-  if (!newOrderForAdmin) {
-    res.status(400);
-    throw new Error("not able to place order");
-  } else {
-    console.log(newOrderForAdmin);
+  const { customerEmail, providerEmail, cart } = req.body;
+  const statusCart = {
+    cart,
+    status: "ordered",
+  } ;
+  const user = await Orders.findOne({ userEmail: customerEmail });
+  const newOrder = {
+    userEmail: customerEmail,
+    orderData: [statusCart],
   }
+  const provider = await RestaurantClients.findOneAndUpdate(
+    { email: providerEmail },
+    {$push: {orders: newOrder}},
+    { new: true, useFindAndModify: false },
+    );
+  // console.log(provider);
+  //new order of restaurant
+
+  // const newOrderForAdmin = await provider.orders.push(newOrder);
+
+  // if (!newOrderForAdmin) {
+  //   res.status(400);
+  //   throw new Error("not able to place order");
+  // } else {
+  //   console.log(newOrderForAdmin);
+  // }
 
   //for user
   if (user && provider) {
     const filter = {
-      userEmail: email,
+      userEmail: customerEmail,
       providerEmail: providerEmail,
     };
-    const update = { $push: { orderData: cart } };
+    const update = { $push: { orderData: statusCart, } };
     const updatedOrder = await Orders.findOneAndUpdate(filter, update, {
       new: true,
       useFindAndModify: false,
@@ -82,10 +91,11 @@ const checkOut = asyncHandler(async (req, res) => {
     }
   } else {
     //create
+    console.log(customerEmail, providerEmail);
     const newOrder = await Orders.create({
-      userEmail: email,
+      userEmail: customerEmail,
       providerEmail: providerEmail,
-      orderData: [cart],
+      orderData: [statusCart],
     });
     if (newOrder) {
       res.status(200).json({ message: "new order placed" });

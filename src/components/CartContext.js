@@ -17,7 +17,6 @@ export const CartProvider = ({ children }) => {
             qty: product.qty,
             size: product.size,
             img: product.img,
-            status: "ordered",
           },
         ]);
       case "DELETE":

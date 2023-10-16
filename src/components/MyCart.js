@@ -22,11 +22,11 @@ export default function MyCart() {
     // console.log(cart);
   };
   const handleCheckOut = async () => {
-      const email = localStorage.getItem("userEmail") ;
+      const customerEmail = localStorage.getItem("userEmail") ;
       const providerEmail = localStorage.getItem("providerEmail") ;
       // console.log(userEmail);
       const dataForCheckOut = {
-        email,
+        customerEmail,
         providerEmail,
         cart
       } ;

@@ -3,12 +3,12 @@ const orderSchema = mongoose.Schema({
       userEmail : {
             type: String,
             required: true,
-            unique: true,
+            unique: false,
       },
       providerEmail : {
             type: String,
             require: true,
-            uniqu: true,
+            unique: false,
       },
       orderData : {
             type: Array,
