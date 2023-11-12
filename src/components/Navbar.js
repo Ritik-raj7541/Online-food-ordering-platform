@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark shadow-5-strong navstyle">
         <div className="container-fluid">
           <Link className="navbar-brand navfont" to="/">
-            mandato
+            CraveMate
           </Link>
           <button
             className="navbar-toggler"
