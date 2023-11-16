@@ -49,36 +49,43 @@ const checkOut = asyncHandler(async (req, res) => {
   const statusCart = {
     cart,
     status: "ordered",
-  } ;
-  const user = await Orders.findOne({ userEmail: customerEmail });
+  };
+  const order = await Orders.findOne({ userEmail: customerEmail, providerEmail: providerEmail });
   const newOrder = {
     userEmail: customerEmail,
     orderData: [statusCart],
-  }
-  const provider = await RestaurantClients.findOneAndUpdate(
-    { email: providerEmail },
-    {$push: {orders: newOrder}},
-    { new: true, useFindAndModify: false },
+  };
+  const restaurant = await RestaurantClients.findOne({email: providerEmail}) ;
+  // console.log(restaurant.orders); 
+  const userOrder = await restaurant.orders.find(o => o.userEmail === customerEmail) ;
+  // console.log(userOrder);
+  if (userOrder) {
+    const update = { $push: { orderData: statusCart } };
+    const provider = await RestaurantClients.findOneAndUpdate(
+      {email: providerEmail, "orders.userEmail": customerEmail},
+      { $push: { 'orders.$[elem].orderData': statusCart } },
+      { arrayFilters: [{ 'elem.userEmail': customerEmail }] }, 
+       {
+        new: true,
+        useFindAndModify: false,
+      }) ;
+    // console.log("present");
+  } else {
+    const provider = await RestaurantClients.findOneAndUpdate(
+      { email: providerEmail },
+      { $push: { orders: newOrder } },
+      { new: true, useFindAndModify: false }
     );
-  // console.log(provider);
-  //new order of restaurant
-
-  // const newOrderForAdmin = await provider.orders.push(newOrder);
-
-  // if (!newOrderForAdmin) {
-  //   res.status(400);
-  //   throw new Error("not able to place order");
-  // } else {
-  //   console.log(newOrderForAdmin);
-  // }
+    // console.log("not present");
+  }
 
   //for user
-  if (user && provider) {
+  if (order) {
     const filter = {
       userEmail: customerEmail,
       providerEmail: providerEmail,
     };
-    const update = { $push: { orderData: statusCart, } };
+    const update = { $push: { orderData: statusCart } };
     const updatedOrder = await Orders.findOneAndUpdate(filter, update, {
       new: true,
       useFindAndModify: false,
@@ -139,7 +146,6 @@ const search = asyncHandler(async (req, res) => {
   const restaurant = await RestaurantClients.findById(restaurantId);
   const foodItems = restaurant.foodItems;
   if (query.length > 0 && foodItems.length > 0) {
-
     const results = foodItems.filter((foodItem) => {
       return (
         foodItem.name.match(new RegExp(query, "i")) ||

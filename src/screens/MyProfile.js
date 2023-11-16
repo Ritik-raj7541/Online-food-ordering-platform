@@ -56,7 +56,7 @@ export default function MyProfile() {
 
               <div className="container packet my-3">
                 <h4>Date : </h4>
-                <h4>Status : <span style={{color:"red"}}>{order.status}</span></h4> 
+                <h4>Status : <span style={order.status==='ordered'?{color:"red"}:{color:"green"}}>{order.status}</span></h4> 
                 {order.cart.map((items) => (
                   <div className="container  row">
                     <div className="items col-2 my-2" key={1}>

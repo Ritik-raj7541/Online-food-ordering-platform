@@ -43,7 +43,7 @@ export default function Login() {
       );
       if (response.status === 200) {
         localStorage.setItem("authTokenAdmin", response.data.accessToken);
-        localStorage.setItem("adminEmail", credentials.email);
+        localStorage.setItem("adminEmail", credentialsadmin.email);
         setloginError("");
         const restUrl = "/landingPageAdmin/"+ response.data.response.id ;
         navigate(restUrl);

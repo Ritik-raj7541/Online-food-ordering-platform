@@ -2,6 +2,8 @@ const asyncHandler = require('express-async-handler') ;
 const foodItem = require('../../models/foods/foodItems') ;
 const foodCategory = require('../../models/foods/foodCategory') ;
 const Admin = require('../../models/CraveMatePartners/RestaurantClients') ;
+const RestaurantClients = require('../../models/CraveMatePartners/RestaurantClients');
+const orders = require('../../models/orders');
 //1.
 //GET - api/admin/get-all-items
 const getFoodItems = asyncHandler(async(req, res) =>{
@@ -83,8 +85,30 @@ const updateItem = asyncHandler(async(req, res)=>{const itemId = req.params.id ;
       const updatedItem = await foodItem.findByIdAndUpdate({_id: itemId}, req.body,{new:true}) ;
       res.status(200).json(updatedItem) ;
 }) ;
+
+//6.
+//GET /api/customer/update-orders/:resEmail/:custEmail 
+const updateOrder = asyncHandler( async(req, res)=>{
+      const providerEmail = req.params.resEmail ;
+      const customerEmail = req.params.custEmail ;
+      const updatedRest = await RestaurantClients.findOneAndUpdate(
+            {email: providerEmail},
+            { $pull: {orders: {userEmail: customerEmail}}},
+            {new: true},
+      ) ;
+            // console.log(providerEmail, customerEmail);
+      const updateOrder = await orders.findOneAndUpdate(
+            {userEmail: customerEmail,
+             providerEmail: providerEmail,
+             'orderData.status': "ordered"
+            },
+            { $set: {'orderData.$[].status': "Delevered"}}
+      )
+      res.status(200).json(updateOrder) ;
+}) ;
 module.exports = {postItems, 
                   deleteItems, 
                   getFoodItems, 
-                  updateItem
+                  updateItem,
+                  updateOrder
             } ;

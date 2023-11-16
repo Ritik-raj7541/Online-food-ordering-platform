@@ -34,8 +34,10 @@ export default function LandingAdmin() {
 
   const handleClick = (e) => {
     if (e === 1) {
+      fetchRestaurantDetails() ;
       getAllItems();
     } else if (e === 2) {
+      fetchRestaurantDetails() ;
       getAllOrders() ;
     } else if (e === 3) {
       console.log(e);
@@ -69,7 +71,7 @@ export default function LandingAdmin() {
       </div>
       <hr style={{ borderTop: "3px solid" }} />
       {foodItems.length === 0 ? "" : <AllItemsAdmin foodItems={foodItems} />}
-      {orderItems.length === 0 ? "" : <OrderItemAdmin orderItems = {orderItems}/>}
+      {orderItems.length === 0 ? "" : <OrderItemAdmin orderItems = {orderItems} id={id}/>}
     </div>
   );
 }
